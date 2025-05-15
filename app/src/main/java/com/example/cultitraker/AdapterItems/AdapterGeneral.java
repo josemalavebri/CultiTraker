@@ -16,17 +16,19 @@ import java.util.ArrayList;
 
 public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHolder>{
 
+    private final int layoutId;
     private ArrayList<AdapterModel> listaDatos = new ArrayList<>();
     private Context context;
-    public AdapterGeneral(ArrayList<AdapterModel> listaDatos, Context context) {
+    public AdapterGeneral(ArrayList<AdapterModel> listaDatos, Context context,  int layoutId) {
         this.listaDatos = listaDatos;
         this.context = context;
+        this.layoutId = layoutId;
     }
 
     @NonNull
     @Override
     public AdapterGeneral.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.card_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(layoutId, parent, false));
     }
 
     @Override

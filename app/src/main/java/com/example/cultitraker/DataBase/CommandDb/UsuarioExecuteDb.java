@@ -62,6 +62,7 @@ public class UsuarioExecuteDb {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         if (data.moveToFirst()) {
             do {
+
                 int idxId = data.getColumnIndex("id");
                 int idxPass = data.getColumnIndex("password");
                 int idxEmail = data.getColumnIndex("email");
@@ -75,10 +76,10 @@ public class UsuarioExecuteDb {
                 }
             } while (data.moveToNext());
         }
+
         return usuarios;
+
     }
-
-
 
 
 }
