@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listaNacionalidad">
+        <item>Ecuatoriana</item>
+        <item>Chilena</item>
+        <item>Colombiana</item>
+    </string-array>
+</resources>
