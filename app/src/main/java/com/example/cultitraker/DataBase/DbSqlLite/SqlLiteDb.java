@@ -17,12 +17,12 @@ public class SqlLiteDb extends SQLiteOpenHelper {
 
 
 
-    public static final String TABLA_CULTIVO = "CREATE TABLE parcela (" +
+    public static final String TABLA_PARCELA = "CREATE TABLE parcela (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
             "nombre TEXT,"+
-            "ubicacion TEXT,"+
-            "area REAL,"+
-            "cultivo TEXT)";
+            "tamano INTEGER,"+
+            "cultivo TEXT,"+
+            "cantidadCultivo INTEGER)";
 
     //AGREGAR SU TABLA
 
@@ -35,7 +35,7 @@ public class SqlLiteDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLA_USUARIO);
-        db.execSQL(TABLA_CULTIVO);
+        db.execSQL(TABLA_PARCELA);
     }
 
     @Override

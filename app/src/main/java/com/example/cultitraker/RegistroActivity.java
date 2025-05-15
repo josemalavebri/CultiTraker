@@ -33,8 +33,8 @@ public class RegistroActivity extends AppCompatActivity {
         usuarioExecuteDb = new UsuarioExecuteDb(this);
         Usuario usuario = new Usuario();
         usuario.setId(0);
-        usuario.setEmail(((EditText)findViewById(R.id.txt_correoRegistro)).getText().toString());
-        usuario.setPassword(((EditText)findViewById(R.id.txt_contrasenaRegistro)).getText().toString());
+        usuario.setEmail(((EditText)findViewById(R.id.txt_nombreParcela)).getText().toString());
+        usuario.setPassword(((EditText)findViewById(R.id.txt_tamanoParcela)).getText().toString());
         return usuario;
     }
 
@@ -55,9 +55,9 @@ public class RegistroActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void reseteoObjetos(){
-        ((EditText)findViewById(R.id.txt_correoRegistro)).setText("");
-        ((EditText)findViewById(R.id.txt_contrasenaRegistro)).setText("");
-        ((EditText)findViewById(R.id.txt_contrasenaRegistroConfirmar)).setText("");
+        ((EditText)findViewById(R.id.txt_nombreParcela)).setText("");
+        ((EditText)findViewById(R.id.txt_tamanoParcela)).setText("");
+        ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
 
     }
 

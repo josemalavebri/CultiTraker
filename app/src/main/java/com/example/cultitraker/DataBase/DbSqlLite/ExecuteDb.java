@@ -33,8 +33,6 @@ public class ExecuteDb {
         return db_Edit.insert(tabla, null, cv)>=0;
     }
 
-
-
     public Cursor consultarDatos(String tabla) {
         SQLiteDatabase db_Select = db.getReadableDatabase();
         Cursor data = db_Select.rawQuery("SELECT * FROM " + tabla, null);
