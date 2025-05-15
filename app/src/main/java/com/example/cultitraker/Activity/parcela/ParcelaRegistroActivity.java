@@ -23,4 +23,5 @@ public class ParcelaRegistroActivity extends AppCompatActivity {
             return insets;
         });
     }
+
 }

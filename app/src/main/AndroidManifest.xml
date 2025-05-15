@@ -15,10 +15,12 @@
         <activity
             android:name=".Activity.parcela.ParcelaRegistroActivity"
             android:exported="false" />
-        <activity
+       <!-- <activity
             android:name=".Activity.parcela.RegistroParcelaActivity"
             android:exported="false"
             android:theme="@style/Theme.CultiTraker" />
+        -->
+
         <activity
             android:name=".Activity.parcela.ParcelaActivity"
             android:exported="false" />
