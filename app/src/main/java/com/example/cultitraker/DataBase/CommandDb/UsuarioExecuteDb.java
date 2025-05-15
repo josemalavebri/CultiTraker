@@ -6,7 +6,6 @@ import android.database.Cursor;
 import com.example.cultitraker.DataBase.DbSqlLite.ExecuteDb;
 import com.example.cultitraker.Models.Usuario;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
