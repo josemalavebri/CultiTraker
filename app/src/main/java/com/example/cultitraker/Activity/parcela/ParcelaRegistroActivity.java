@@ -42,10 +42,10 @@ public class ParcelaRegistroActivity extends AppCompatActivity {
 
     private Parcela crearParcelaData(){
         Parcela parcela = new Parcela();
-        EditText nombre = findViewById(R.id.txt_nombreParcela);
-        EditText cultivo = findViewById(R.id.txt_cultivoParcela);
-        EditText tamano = findViewById(R.id.txt_tamanoParcela);
-        EditText cantidadCultivo = findViewById(R.id.txt_cantidadParcela);
+        EditText nombre = findViewById(R.id.txt_idCultivo);
+        EditText cultivo = findViewById(R.id.txt_tipoCultivo);
+        EditText tamano = findViewById(R.id.txt_tipoCultivo);
+        EditText cantidadCultivo = findViewById(R.id.txt_idCultivo);
         String nombreParcela = nombre.getText().toString();
         String cultivoParcela = cultivo.getText().toString();
         String tamanoParcela = tamano.getText().toString();

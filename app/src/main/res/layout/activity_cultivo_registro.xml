@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loginbkg"
-    tools:context=".RegistroActivity">
+    android:background="@drawable/roca"
+    android:padding="20dp"
+    tools:context=".Activity.parcela.ParcelaRegistroActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -18,13 +19,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="392dp"
-            android:layout_height="343dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/custom_edittext"
             android:backgroundTint="#FFFFFF"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:padding="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -35,8 +36,9 @@
             <TextView
                 android:id="@+id/loginText2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Registro"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10sp"
+                android:text="Nuevo Cultivo"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="36sp"
@@ -48,7 +50,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Correo"
+                android:hint="Id Cultivo"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/black"
+                android:textSize="19sp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <EditText
+                android:id="@+id/txt_nombreCultivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/custom_edittext"
+                android:hint="Nombre"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 android:textColor="@android:color/black"
@@ -61,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Contraseña"
+                android:hint="Tipo Cultivo"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 android:textColor="@android:color/black"
@@ -74,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Contraseña"
+                android:hint="Fecha Siembra"
                 android:inputType="number"
                 android:padding="12dp"
                 android:textColorHint="@color/black" />
@@ -82,7 +103,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="6dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="3">
@@ -90,12 +111,12 @@
                 <Button
                     android:id="@+id/btn_guardarParcelas"
                     style="@style/Widget.Material3.Button"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="@color/purple"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="guardarBD"
+                    android:onClick="RegistrarParcelaButtonAction"
                     android:text="Guardar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />
@@ -103,7 +124,7 @@
                 <Button
                     android:id="@+id/btn_salirPacerlas"
                     style="@style/Widget.Material3.Button"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
