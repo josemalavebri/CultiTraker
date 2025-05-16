@@ -48,6 +48,7 @@ public class TareaRegistroActivity extends AppCompatActivity {
 
         return tarea;
     }
+
     public void RegistrarTareaButtonAction(View view) {
         Tareas tarea = crearTareaData();
         TareasExecuteDb tareasExecuteDb = new TareasExecuteDb(this);

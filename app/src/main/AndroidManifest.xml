@@ -12,36 +12,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CultiTraker"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".Activity.Cultivo.CultivoActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Activity.tareas.TareaRegistroActivity"
             android:exported="false" />
+
         <activity
-            android:name=".Activity.Cultivo.ActivityCultivo"
+            android:name=".Activity.tareas.TareasActivity"
             android:exported="false" />
+
+
         <activity
             android:name=".Activity.parcela.ParcelaRegistroActivity"
             android:exported="false" />
-        <!--
- <activity
-            android:name=".Activity.parcela.RegistroParcelaActivity"
-            android:exported="false"
-            android:theme="@style/Theme.CultiTraker" />
-        -->
+
         <activity
             android:name=".Activity.parcela.ParcelaActivity"
             android:exported="false" />
+
         <activity
             android:name=".PrincipalActivity"
             android:exported="false" />
+
         <activity
             android:name=".IniciarSesion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
+
         <activity android:name=".RegistroActivity" />
     </application>
 

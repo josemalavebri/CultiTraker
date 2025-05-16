@@ -16,7 +16,7 @@ public class Tareas {
     }
 
     public Tareas(){
-
+        this.id=0;
     }
 
     public int getId() {

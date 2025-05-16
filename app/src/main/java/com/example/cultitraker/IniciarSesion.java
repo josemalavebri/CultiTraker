@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cultitraker.Activity.Cultivo.CultivoActivity;
 import com.example.cultitraker.Activity.parcela.ParcelaActivity;
+import com.example.cultitraker.Activity.tareas.TareasActivity;
 import com.example.cultitraker.DataBase.CommandDb.UsuarioExecuteDb;
 import com.example.cultitraker.Models.Usuario;
 

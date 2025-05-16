@@ -40,27 +40,30 @@ public class TareasActivity extends AppCompatActivity {
     public void cargarDatosTarea() {
         ArrayList<Tareas> tareas = cargarDatosTareaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
-
-        for (Tareas tarea : tareas) {
-            AdapterModel adapterModel = new AdapterModel();
-
-            adapterModel.setTitulo(tarea.getTipoActividad());
-            adapterModel.setSubTitulo(tarea.getEstado());
-            adapterModel.setParrafo(tarea.getDescripcion());
-            adapterModel.setDetail(tarea.getFecha());
-
-            adapterModels.add(adapterModel);
+        if(tareas!=null){
+            for (Tareas tarea : tareas) {
+                AdapterModel adapterModel = new AdapterModel();
+                adapterModel.setTitulo(tarea.getTipoActividad());
+                adapterModel.setSubTitulo(tarea.getEstado());
+                adapterModel.setParrafo(tarea.getDescripcion());
+                adapterModel.setDetail(tarea.getFecha());
+                adapterModels.add(adapterModel);
+            }
+            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
+            recyclerView.setAdapter(adapterGeneral);
         }
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
-        recyclerView.setAdapter(adapterGeneral);
     }
+
     private ArrayList<Tareas> cargarDatosTareaDB(){
         TareasExecuteDb tareaExecuteDb = new TareasExecuteDb(this);
         return tareaExecuteDb.consultarDatos();
     }
 
+
+
     public void agregarActionButton(View view){
         Intent intent = new Intent(this, TareaRegistroActivity.class);
         startActivity(intent);
     }
+
 }

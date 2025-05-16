@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlLiteDb extends SQLiteOpenHelper {
-    public static final String DbName="Cultivos.sqlite";
+    public static final String DbName="Cultivos";
     public static final int DbVersion=1;
 
 
