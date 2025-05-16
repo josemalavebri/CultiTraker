@@ -70,27 +70,40 @@
                 android:textColorHint="@color/black"
                 android:textSize="19sp" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                style="@android:style/Widget.Material.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_edittext"
-                android:scrollbarStyle="outsideInset" />
-
-            <EditText
-                android:id="@+id/txt_cultivoParcela"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/custom_edittext"
-                android:hint="Cultivo"
-                android:inputType="textPersonName"
-                android:padding="12dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/black"
-                android:textSize="19sp" />
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_spinner"
+                    android:fontFamily="sans-serif"
+                    android:foregroundTint="#1F1E1E"
+                    android:gravity="center"
+                    android:text="Elige un cultivo"
+                    android:textColor="#191818"
+                    android:textSize="19dp" />
+
+                <Spinner
+                    android:id="@+id/spn_cultivos"
+                    style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_edittext"
+                    android:backgroundTint="#1B1717"
+                    android:foregroundTint="#191818"
+                    android:gravity="center"
+                    android:popupBackground="@color/black"
+                    android:scrollbarStyle="outsideInset" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/txt_cantidadParcela"
@@ -98,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Cantidad cultivo"
+                android:hint="Cantidad del cultivo"
                 android:inputType="number"
                 android:padding="12dp"
                 android:textColorHint="@color/black" />
@@ -133,7 +146,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="cancelarRegistro"
+                    android:onClick="cancelar"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />

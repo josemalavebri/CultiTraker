@@ -1,12 +1,12 @@
 package com.example.cultitraker.Models;
 
-public class Parcela {
+public class ParcelaTierra {
     public int id;
     public String nombre;
-    public double tamano;
+    public int tamano;
     public String cultivo;
     public int cantidadCultivo;
-    public Parcela(int id, String nombre, double tamano, String cultivo, int cantidadCultivo) {
+    public ParcelaTierra(int id, String nombre, int tamano, String cultivo, int cantidadCultivo) {
         this.id = id;
         this.nombre = nombre;
         this.tamano = tamano;
@@ -14,7 +14,7 @@ public class Parcela {
         this.cantidadCultivo = cantidadCultivo;
     }
 
-    public Parcela() {
+    public ParcelaTierra() {
 
     }
 
@@ -34,11 +34,11 @@ public class Parcela {
         this.nombre = nombre;
     }
 
-    public double getTamano() {
+    public int getTamano() {
         return tamano;
     }
 
-    public void setTamano(double tamano) {
+    public void setTamano(int tamano) {
         this.tamano = tamano;
     }
 

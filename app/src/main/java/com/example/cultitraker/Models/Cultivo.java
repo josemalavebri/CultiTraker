@@ -25,4 +25,9 @@ public class Cultivo {
 
     public String getFechaSiembra() { return fechaSiembra; }
     public void setFechaSiembra(String fechaSiembra) { this.fechaSiembra = fechaSiembra; }
+
+    @Override
+    public String toString() {
+        return nombre; // o cualquier campo legible como "tipo" o "variedad"
+    }
 }
