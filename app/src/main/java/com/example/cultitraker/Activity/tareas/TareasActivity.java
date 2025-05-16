@@ -3,7 +3,6 @@ package com.example.cultitraker.Activity.tareas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -37,6 +36,7 @@ public class TareasActivity extends AppCompatActivity {
             return insets;
         });
     }
+
     public void cargarDatosTarea() {
         ArrayList<Tareas> tareas = cargarDatosTareaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();

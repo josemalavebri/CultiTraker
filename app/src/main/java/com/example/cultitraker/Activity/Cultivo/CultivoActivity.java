@@ -40,6 +40,7 @@ public class CultivoActivity extends AppCompatActivity {
             return insets;
         });
     }
+
     public void cargarDatosParcela(){
         ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();

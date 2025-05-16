@@ -8,14 +8,15 @@ public class SqlLiteDb extends SQLiteOpenHelper {
     public static final String DbName="CultiTraker";
     public static final int DbVersion=1;
 
-
+    private static final String TAG = "SqlLiteDb";
 
     public static final String TABLA_USUARIO = "CREATE TABLE usuario(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"email TEXT,"
             +"password TEXT)";
-
-
+    public static final String TABLA_INSUMO="CREATE TABLE InsumoActivity("+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"nombre TEXT,";
 
     public static final String TABLA_PARCELA_TIERRA = "CREATE TABLE parcelaTierra(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
