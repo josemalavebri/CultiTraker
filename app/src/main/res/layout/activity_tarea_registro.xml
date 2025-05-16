@@ -5,9 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roca"
-    android:padding="20dp"
-    tools:context=".Activity.parcela.ParcelaRegistroActivity">
+    android:background="@drawable/piedra"
+    tools:context=".Activity.tareas.TareaRegistroActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -38,19 +37,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10sp"
-                android:text="Nueva Parcela"
+                android:text="Nueva Tarea"
                 android:textAlignment="center"
                 android:textColor="@color/purple"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txt_idCultivo"
+                android:id="@+id/txt_tipoActividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="nombre"
+                android:hint="Tipo de tarea"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/black"
+                android:textSize="19sp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <EditText
+                android:id="@+id/txt_descripcionActividad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/custom_edittext"
+                android:hint="Descripcion"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 android:textColor="@android:color/black"
@@ -58,34 +76,12 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txt_tipoCultivo"
+                android:id="@+id/txt_estadoActividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Tamaño"
-                android:inputType="textPersonName"
-                android:padding="12dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/black"
-                android:textSize="19sp" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                style="@android:style/Widget.Material.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/custom_edittext"
-                android:scrollbarStyle="outsideInset" />
-
-            <EditText
-                android:id="@+id/txt_tipoCultivo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/custom_edittext"
-                android:hint="Cultivo"
+                android:hint="Estado"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 android:textColor="@android:color/black"
@@ -93,12 +89,12 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txt_idCultivo"
+                android:id="@+id/txt_fechaActividad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/custom_edittext"
-                android:hint="Cantidad cultivo"
+                android:hint="Fecha"
                 android:inputType="number"
                 android:padding="12dp"
                 android:textColorHint="@color/black" />
@@ -119,7 +115,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/purple"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="RegistrarParcelaButtonAction"
+                    android:onClick="RegistrarTareaButtonAction"
                     android:text="Guardar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />
@@ -133,15 +129,13 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="cancelarRegistro"
+                    android:onClick="cancelarNuevaTarea"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

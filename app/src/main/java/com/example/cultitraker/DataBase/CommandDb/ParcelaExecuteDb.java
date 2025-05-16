@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ParcelaExecuteDb {
-    private String[] columnas = {"id", "nombre", "tamano","cultivo","cantidadCultivo"};
-    private ExecuteDb executeDb ;
+    private final String[] columnas = {"id", "nombre", "tamano","cultivo","cantidadCultivo"};
+    private final ExecuteDb executeDb ;
     private final String TABLENAME = "parcela";
     public ParcelaExecuteDb(Context c) {
         executeDb = new ExecuteDb(c);

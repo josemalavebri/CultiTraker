@@ -5,17 +5,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlLiteDb extends SQLiteOpenHelper {
-    public static final String DbName="Cultivos.sqlite";
+    public static final String DbName="Cultivos";
     public static final int DbVersion=1;
 
-
+    private static final String TAG = "SqlLiteDb";
 
     public static final String TABLA_USUARIO = "CREATE TABLE usuario(" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"email TEXT,"
             +"password TEXT)";
-
-
+    public static final String TABLA_INSUMO="CREATE TABLE InsumoActivity("+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            +"nombre TEXT,";
 
     public static final String TABLA_PARCELA = "CREATE TABLE parcela (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -25,6 +26,12 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "cantidadCultivo INTEGER)";
 
     //AGREGAR SU TABLA
+    public static final String TABLA_TAREAS = "CREATE TABLE tareas (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+            "tipoActividad TEXT,"+
+            "descripcion TEXT,"+
+            "estado TEXT,"+
+            "fecha TEXT)";
 
 
     public SqlLiteDb(Context context) {
@@ -36,6 +43,7 @@ public class SqlLiteDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLA_USUARIO);
         db.execSQL(TABLA_PARCELA);
+        db.execSQL(TABLA_TAREAS);
     }
 
     @Override

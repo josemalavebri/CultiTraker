@@ -33,7 +33,7 @@ public class CultivoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cultivo);
         recyclerView = findViewById(R.id.recyclerViewCultivo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cargarDatosParcela();
+        //cargarDatosParcela();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
