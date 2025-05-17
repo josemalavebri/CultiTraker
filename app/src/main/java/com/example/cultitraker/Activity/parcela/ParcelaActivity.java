@@ -47,7 +47,7 @@ public class ParcelaActivity extends AppCompatActivity {
             adapterModel.setSubTitulo(usuario.getPassword());
             adapterModels.add(adapterModel);
         }
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item);
+        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_regar);
         recyclerView.setAdapter(adapterGeneral);
     }
 

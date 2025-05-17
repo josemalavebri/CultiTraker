@@ -19,6 +19,15 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "area REAL,"+
             "cultivo TEXT)";
 
+    public static String TABLA_REGAR = "CREATE TABLE regar (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "fecha TEXT, " +
+            "hora TEXT, " +
+            "cantidadAgua REAL, " +
+            "metodoRiego TEXT, " +
+            "parcelaId INTEGER)";
+
+
     public SqlLiteDb(Context context) {
         super(context, DbName, null, DbVersion);
     }
@@ -27,6 +36,7 @@ public class SqlLiteDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLA_USUARIO);
         db.execSQL(TABLA_CULTIVO);
+        db.execSQL(TABLA_REGAR);
     }
 
     @Override
