@@ -39,7 +39,7 @@ public class IniciarSesion extends AppCompatActivity {
 
     public void loginButtonAction(View view){
         Usuario usuario = crearUsuarioData();
-        Intent intent = new Intent(this, CultivoActivity.class);
+        Intent intent = new Intent(this, ParcelaActivity.class);
         UsuarioExecuteDb usuarioExecuteDb = new UsuarioExecuteDb(this);
         boolean isValid = usuarioExecuteDb.consultarPorEmailPassword(usuario);
         if(isValid){

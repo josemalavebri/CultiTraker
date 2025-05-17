@@ -14,7 +14,7 @@ import java.util.Map;
 public class ParcelaExecuteDb {
     private String[] columnas = {"id", "nombre", "tamano","cultivo","cantidadCultivo"};
     private ExecuteDb executeDb ;
-    private final String TABLENAME = "parcela";
+    private final String TABLENAME = "parcelaTierra";
     public ParcelaExecuteDb(Context c) {
         executeDb = new ExecuteDb(c);
     }
@@ -52,7 +52,7 @@ public class ParcelaExecuteDb {
                 int idxNombre = data.getColumnIndex("nombre");
                 int idxTamano = data.getColumnIndex("tamano");
                 int idxCultivo = data.getColumnIndex("cultivo");
-                int idxCantidad = data.getColumnIndex("cantidadCultivos");
+                int idxCantidad = data.getColumnIndex("cantidadCultivo");
 
                 if (idxId != -1 && idxNombre != -1 && idxTamano != -1 &&
                         idxCultivo != -1 && idxCantidad != -1) {
