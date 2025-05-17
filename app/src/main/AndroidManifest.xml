@@ -15,6 +15,10 @@
         <activity
             android:name=".Activity.Cultivo.CultivoActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Activity.tareas.TareasActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activity.Cultivo.CultivoRegistroActivity"
             android:exported="false" />

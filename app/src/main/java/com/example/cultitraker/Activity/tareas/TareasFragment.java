@@ -1,14 +1,26 @@
 package com.example.cultitraker.Activity.tareas;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.cultitraker.AdapterItems.AdapterGeneral;
+import com.example.cultitraker.AdapterItems.AdapterModel;
+import com.example.cultitraker.DataBase.CommandDb.TareasExecuteDb;
+import com.example.cultitraker.Models.Tareas;
 import com.example.cultitraker.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +29,7 @@ import com.example.cultitraker.R;
  */
 public class TareasFragment extends Fragment {
 
+    RecyclerView recyclerView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +74,58 @@ public class TareasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tareas, container, false);
+        //return inflater.inflate(R.layout.fragment_tareas, container, false);
+        View view = inflater.inflate(R.layout.fragment_tareas, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewTareas);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        cargarDatosTarea();
+
+        //No funciona usar ese metodo "callback" declarado asi
+        View botonAgregar = view.findViewById(R.id.button7);
+        botonAgregar.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), TareaRegistroActivity.class);
+            startActivity(intent);
+        });
+        //este usa el id:main en cambio los fragments no tienen
+        /*
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        */
+        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        return view;
     }
+    public void cargarDatosTarea() {
+        ArrayList<Tareas> tareas = cargarDatosTareaDB();
+        ArrayList<AdapterModel> adapterModels = new ArrayList<>();
+        if (tareas != null) {
+            for (Tareas tarea : tareas) {
+                AdapterModel adapterModel = new AdapterModel();
+                adapterModel.setTitulo(tarea.getTipoActividad());
+                adapterModel.setSubTitulo(tarea.getEstado());
+                adapterModel.setParrafo(tarea.getDescripcion());
+                adapterModel.setDetail(tarea.getFecha());
+                adapterModels.add(adapterModel);
+            }
+            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
+            recyclerView.setAdapter(adapterGeneral);
+        }
+    }
+
+    private ArrayList<Tareas> cargarDatosTareaDB() {
+        TareasExecuteDb tareaExecuteDb = new TareasExecuteDb(requireContext());
+        return tareaExecuteDb.consultarDatos();
+    }
+    /*
+    public void agregarActionButton(View view){
+        Intent intent = new Intent(this, TareaRegistroActivity.class);
+        startActivity(intent);
+    }
+    */
 }

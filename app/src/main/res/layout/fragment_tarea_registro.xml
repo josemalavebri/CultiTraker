@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.tareas.TareaRegistro">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_purple_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/custom_edittext"
+        android:backgroundTint="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/txt_nuevoParcela"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10sp"
+            android:text="Nueva Tarea"
+            android:textAlignment="center"
+            android:textColor="@color/purple"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txt_tipoActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/custom_edittext"
+            android:hint="Tipo de tarea"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
+            android:textSize="19sp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <EditText
+            android:id="@+id/txt_descripcionActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/custom_edittext"
+            android:hint="Descripcion"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
+            android:textSize="19sp" />
+
+        <EditText
+            android:id="@+id/txt_estadoActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/custom_edittext"
+            android:hint="Estado"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
+            android:textSize="19sp" />
+
+        <EditText
+            android:id="@+id/txt_fechaActividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/custom_edittext"
+            android:hint="Fecha"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColorHint="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btn_guardar"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/purple"
+                android:fontFamily="sans-serif-black"
+                android:text="Guardar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btn_salir"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/design_default_color_error"
+                android:fontFamily="sans-serif-black"
+                android:onClick="cancelarNuevaTarea"
+                android:text="Cancelar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
