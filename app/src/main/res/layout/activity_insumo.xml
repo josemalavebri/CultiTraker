@@ -5,13 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10sp"
-    tools:context=".Activity.parcela.ParcelaActivity">
+    android:background="@drawable/piedra"
+    tools:context=".Activity.insumo.InsumoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/roca"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="10dp"
@@ -31,27 +30,31 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/minecrafter"
                 android:gravity="center"
-                android:text="Parcelas"
+                android:text="Insumos"
+                android:textColor="#FFFFFF"
                 android:textSize="34dp" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewParcelas"
+            android:id="@+id/recyclerViewInsumo"
             android:layout_width="match_parent"
-            android:layout_height="524dp" />
+            android:layout_height="524dp"
+            android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/btn_Agregar"
             style="@style/Widget.Material3.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="135dp"
+            android:layout_height="62dp"
             android:backgroundTint="#FFFFFF"
-            android:onClick="agregarActionButton"
+            android:onClick="Agregar"
             android:text="Agregar"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#2196F3"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

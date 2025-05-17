@@ -1,5 +1,6 @@
-package com.example.cultitraker.Activity.parcela;
+package com.example.cultitraker.Activity.Cultivo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,32 +13,26 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cultitraker.Activity.parcela.ParcelaRegistroActivity;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
-import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
 import com.example.cultitraker.Models.Cultivo;
-import com.example.cultitraker.Models.ParcelaTierra;
 import com.example.cultitraker.R;
 
 import java.util.ArrayList;
 
-public class ParcelaActivity extends AppCompatActivity {
+public class CultivoActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_parcela);
-
-        //PONER SUS RECYCLER VIEW CON SU ID
-        recyclerView = findViewById(R.id.recyclerViewParcelas);
-
-        //LINEA OBLIGATORIA
+        setContentView(R.layout.activity_cultivo);
+        recyclerView = findViewById(R.id.recyclerViewCultivo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         cargarDatosParcela();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -46,35 +41,33 @@ public class ParcelaActivity extends AppCompatActivity {
         });
     }
 
-
     public void cargarDatosParcela(){
-        ArrayList<ParcelaTierra> parcelas = cargarDatosParcelaDB();
+        ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
-        for (ParcelaTierra parcela : parcelas){
+        for(Cultivo cultivo: cultivos) {
             AdapterModel adapterModel = new AdapterModel();
 
-            adapterModel.setTitulo(parcela.getNombre());
-            adapterModel.setSubTitulo(parcela.getCultivo());
-            adapterModel.setParrafo(""+parcela.getTamano());
-            adapterModel.setDetail(""+parcela.getCantidadCultivo());
+            adapterModel.setTitulo(cultivo.getNombre());
+            adapterModel.setSubTitulo(cultivo.getTipo());
+            adapterModel.setParrafo(cultivo.getFechaSiembra());
             adapterModels.add(adapterModel);
         }
 
         //ENVIAR SUS CARD ITEMS CON SU ID
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_parcela);
+        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
         recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<ParcelaTierra> cargarDatosParcelaDB(){
-        ParcelaExecuteDb parcelaExecuteDb = new ParcelaExecuteDb(this);
-        return parcelaExecuteDb.consultarDatos();
+
+
+    private ArrayList<Cultivo> cargarDatosParcelaDB(){
+        CultivoExecuteDb cultivoExecuteDb = new CultivoExecuteDb(this);
+        return cultivoExecuteDb.consultarDatos();
     }
 
     public void agregarActionButton(View view){
         Intent intent = new Intent(this, ParcelaRegistroActivity.class);
         startActivity(intent);
     }
-
-
 }

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import com.example.cultitraker.DataBase.DbSqlLite.ExecuteDb;
 import com.example.cultitraker.Models.Usuario;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +67,7 @@ public class UsuarioExecuteDb {
                 int idxEmail = data.getColumnIndex("email");
 
                 if (idxId != -1 && idxPass != -1 && idxEmail != -1) {
-                    String id = data.getString(idxId);
+                    String id = data.getString(0);
                     String password = data.getString(idxPass);
                     String email = data.getString(idxEmail);
                     int idConvert = Integer.parseInt(id);
@@ -76,9 +75,7 @@ public class UsuarioExecuteDb {
                 }
             } while (data.moveToNext());
         }
-
         return usuarios;
-
     }
 
 
