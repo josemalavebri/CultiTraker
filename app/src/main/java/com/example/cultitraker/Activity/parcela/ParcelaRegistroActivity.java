@@ -60,4 +60,3 @@ public class ParcelaRegistroActivity extends AppCompatActivity {
 
 
 }
-

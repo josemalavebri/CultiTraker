@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlLiteDb extends SQLiteOpenHelper {
-    public static final String DbName="Cultivos";
+    public static final String DbName="CultiTraker";
     public static final int DbVersion=1;
 
     private static final String TAG = "SqlLiteDb";
@@ -24,6 +24,7 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "tipo TEXT," +
             "fechaSiembra TEXT)";
     public static final String TABLA_PARCELA = "CREATE TABLE parcela (" +
+
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
             "nombre TEXT,"+
             "tamano INTEGER,"+
@@ -38,6 +39,14 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "estado TEXT,"+
             "fecha TEXT)";
 
+    public static String TABLA_REGAR = "CREATE TABLE regar (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "fecha TEXT, " +
+            "hora TEXT, " +
+            "cantidadAgua REAL, " +
+            "metodoRiego TEXT, " +
+            "parcelaId INTEGER)";
+
 
     public SqlLiteDb(Context context) {
         super(context, DbName, null, DbVersion);
@@ -50,11 +59,16 @@ public class SqlLiteDb extends SQLiteOpenHelper {
         db.execSQL(TABLA_PARCELA);
         db.execSQL(TABLA_TAREAS);
         db.execSQL(TABLA_CULTIVO);
+        db.execSQL(TABLA_REGAR);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS parcelaTierra");
+        db.execSQL("DROP TABLE IF EXISTS usuario");
+        db.execSQL("DROP TABLE IF EXISTS tareas");
+        db.execSQL("DROP TABLE IF EXISTS cultivo");
+        onCreate(db);
     }
 
 }

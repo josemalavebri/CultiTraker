@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
-import com.example.cultitraker.DataBase.CommandDb.UsuarioExecuteDb;
-import com.example.cultitraker.Models.Usuario;
+import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
+import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
+import com.example.cultitraker.Models.Cultivo;
+import com.example.cultitraker.Models.Parcela;
 import com.example.cultitraker.R;
 
 import java.util.ArrayList;
@@ -46,31 +48,33 @@ public class ParcelaActivity extends AppCompatActivity {
 
 
     public void cargarDatosParcela(){
-        ArrayList<Usuario> usuarios = cargarDatosParcelaDB();
+        ArrayList<Parcela> parcelas = cargarDatosParcelaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
-        for (Usuario usuario : usuarios){
+        for (Parcela parcela : parcelas){
             AdapterModel adapterModel = new AdapterModel();
 
-            adapterModel.setTitulo(usuario.getEmail());
-            adapterModel.setSubTitulo(usuario.getPassword());
-            adapterModel.setParrafo("parrafo");
-            adapterModel.setDetail("detalles");
-
+            adapterModel.setTitulo(parcela.getNombre());
+            adapterModel.setSubTitulo(parcela.getCultivo());
+            adapterModel.setParrafo(""+parcela.getTamano());
+            adapterModel.setDetail(""+parcela.getCantidadCultivo());
             adapterModels.add(adapterModel);
         }
+
         //ENVIAR SUS CARD ITEMS CON SU ID
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
+        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_parcela);
         recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<Usuario> cargarDatosParcelaDB(){
-        UsuarioExecuteDb usuarioExecuteDb = new UsuarioExecuteDb(this);
-        return usuarioExecuteDb.consultarDatos();
+    private ArrayList<Parcela> cargarDatosParcelaDB(){
+        ParcelaExecuteDb parcelaExecuteDb = new ParcelaExecuteDb(this);
+        return parcelaExecuteDb.consultarDatos();
     }
 
     public void agregarActionButton(View view){
         Intent intent = new Intent(this, ParcelaRegistroActivity.class);
         startActivity(intent);
     }
+
+
 }

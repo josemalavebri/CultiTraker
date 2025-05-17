@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ParcelaExecuteDb {
-    private final String[] columnas = {"id", "nombre", "tamano","cultivo","cantidadCultivo"};
-    private final ExecuteDb executeDb ;
-    private final String TABLENAME = "parcela";
+    private String[] columnas = {"id", "nombre", "tamano","cultivo","cantidadCultivo"};
+    private ExecuteDb executeDb ;
+    private final String TABLENAME = "parcelaTierra";
     public ParcelaExecuteDb(Context c) {
         executeDb = new ExecuteDb(c);
     }
@@ -52,14 +52,14 @@ public class ParcelaExecuteDb {
                 int idxNombre = data.getColumnIndex("nombre");
                 int idxTamano = data.getColumnIndex("tamano");
                 int idxCultivo = data.getColumnIndex("cultivo");
-                int idxCantidad = data.getColumnIndex("cantidadCultivos");
+                int idxCantidad = data.getColumnIndex("cantidadCultivo");
 
                 if (idxId != -1 && idxNombre != -1 && idxTamano != -1 &&
                         idxCultivo != -1 && idxCantidad != -1) {
 
                     int id = data.getInt(idxId);
                     String nombre = data.getString(idxNombre);
-                    double tamano = data.getDouble(idxTamano);
+                    int tamano = data.getInt(idxTamano);
                     String cultivo = data.getString(idxCultivo);
                     int cantidadCultivos = data.getInt(idxCantidad);
 
