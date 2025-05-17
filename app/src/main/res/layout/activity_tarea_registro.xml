@@ -33,7 +33,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <TextView
-                android:id="@+id/loginText2"
+                android:id="@+id/txt_nuevoParcela"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10sp"
@@ -108,7 +108,7 @@
                 android:weightSum="3">
 
                 <Button
-                    android:id="@+id/btn_guardarParcelas"
+                    android:id="@+id/btn_guardar"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/btn_salirPacerlas"
+                    android:id="@+id/btn_salir"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

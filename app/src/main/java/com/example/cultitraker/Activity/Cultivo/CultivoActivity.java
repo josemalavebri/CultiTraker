@@ -3,7 +3,10 @@ package com.example.cultitraker.Activity.Cultivo;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +22,15 @@ import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
 import com.example.cultitraker.Models.Cultivo;
 import com.example.cultitraker.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class CultivoActivity extends AppCompatActivity {
 
@@ -34,11 +44,14 @@ public class CultivoActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewCultivo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //cargarDatosParcela();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
     public void cargarDatosParcela(){
         ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
@@ -64,7 +77,7 @@ public class CultivoActivity extends AppCompatActivity {
     }
 
     public void agregarActionButton(View view){
-        Intent intent = new Intent(this, ParcelaRegistroActivity.class);
+        Intent intent = new Intent(this, CultivoRegistroActivity.class);
         startActivity(intent);
     }
 }

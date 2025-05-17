@@ -2,6 +2,7 @@ package com.example.cultitraker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cultitraker.Activity.Cultivo.CultivoActivity;
 import com.example.cultitraker.Activity.insumo.InsumoActivity;
 import com.example.cultitraker.Activity.parcela.ParcelaActivity;
 import com.example.cultitraker.DataBase.CommandDb.UsuarioExecuteDb;
@@ -38,11 +40,13 @@ public class IniciarSesion extends AppCompatActivity {
 
     public void loginButtonAction(View view){
         Usuario usuario = crearUsuarioData();
-        Intent intent = new Intent(this, InsumoActivity.class);
+        Intent intent = new Intent(this,CultivoActivity.class);
         UsuarioExecuteDb usuarioExecuteDb = new UsuarioExecuteDb(this);
         boolean isValid = usuarioExecuteDb.consultarPorEmailPassword(usuario);
         if(isValid){
             startActivity(intent);
+            Log.d("RegarDebug", "Entrando a CultivoActivity");
+            Toast.makeText(this, "CultivoActivity abierta", Toast.LENGTH_SHORT).show();
             Toast.makeText(this,"Sesion Iniciada",Toast.LENGTH_LONG).show();
         } else{
             Toast.makeText(this,"Sesion Fallida",Toast.LENGTH_LONG).show();

@@ -33,8 +33,8 @@ public class RegistroActivity extends AppCompatActivity {
         usuarioExecuteDb = new UsuarioExecuteDb(this);
         Usuario usuario = new Usuario();
         usuario.setId(0);
-        usuario.setEmail(((EditText)findViewById(R.id.txt_idCultivo)).getText().toString());
-        usuario.setPassword(((EditText)findViewById(R.id.txt_tipoCultivo)).getText().toString());
+        usuario.setEmail(((EditText)findViewById(R.id.txt_cantidadParcela)).getText().toString());
+        usuario.setPassword(((EditText)findViewById(R.id.txt_)).getText().toString());
         return usuario;
     }
 
@@ -55,9 +55,9 @@ public class RegistroActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void reseteoObjetos(){
-        ((EditText)findViewById(R.id.txt_idCultivo)).setText("");
-        ((EditText)findViewById(R.id.txt_tipoCultivo)).setText("");
-        ((EditText)findViewById(R.id.txt_idCultivo)).setText("");
+        ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
+        ((EditText)findViewById(R.id.txt_)).setText("");
+        ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
 
     }
 

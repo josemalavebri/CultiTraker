@@ -34,7 +34,7 @@
             app:layout_constraintVertical_bias="1.0">
 
             <TextView
-                android:id="@+id/loginText2"
+                android:id="@+id/txt_nuevoParcela"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10sp"
@@ -45,7 +45,6 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txt_idCultivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -58,7 +57,6 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txt_tipoCultivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -80,7 +78,7 @@
                 android:scrollbarStyle="outsideInset" />
 
             <EditText
-                android:id="@+id/txt_tipoCultivo"
+                android:id="@+id/txt_"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -93,7 +91,7 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txt_idCultivo"
+                android:id="@+id/txt_cantidadParcela"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -112,7 +110,7 @@
                 android:weightSum="3">
 
                 <Button
-                    android:id="@+id/btn_guardarParcelas"
+                    android:id="@+id/btn_guardar"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +123,7 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/btn_salirPacerlas"
+                    android:id="@+id/btn_salir"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,7 +131,6 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="cancelarRegistro"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />
