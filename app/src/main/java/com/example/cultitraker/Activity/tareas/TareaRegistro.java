@@ -63,6 +63,7 @@ public class TareaRegistro extends Fragment {
         }
     }
 
+    // se usa el de aqui, el onCreate no se utiliza.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

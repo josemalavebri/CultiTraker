@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roca"
-    tools:context=".Activity.tareas.TareasActivity">
+    android:background="@drawable/cultivo"
+    tools:context=".Activity.Cultivo.CultivoFrag">
 
     <LinearLayout
-        android:layout_width="387dp"
-        android:layout_height="699dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -32,28 +28,27 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/minecrafter"
                 android:gravity="center"
-                android:text="Tareas"
+                android:text="Cultivo"
+                android:textColor="@color/white"
                 android:textSize="34dp" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTareas"
+            android:id="@+id/recyclerViewCultivo"
             android:layout_width="match_parent"
             android:layout_height="524dp" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/button2"
             style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
             android:onClick="agregarActionButton"
             android:text="Agregar"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/black" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
