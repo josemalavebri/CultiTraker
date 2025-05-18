@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/piedra"
-    tools:context=".Activity.insumo.InsumoFrag">
+    tools:context=".fragment_riego">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fondoregar"
         android:gravity="center"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -24,35 +21,31 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textCultivo"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/minecrafter"
                 android:gravity="center"
-                android:text="Insumos"
-                android:textColor="#FFFFFF"
+                android:text="Regar"
                 android:textSize="34dp" />
 
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewInsumo"
+            android:id="@+id/recyclerViewRegar"
             android:layout_width="match_parent"
-            android:layout_height="524dp"
-            android:layout_margin="10dp" />
+            android:layout_height="524dp" />
 
         <Button
             android:id="@+id/btn_Agregar"
             style="@style/Widget.Material3.Button"
-            android:layout_width="135dp"
-            android:layout_height="62dp"
-            android:backgroundTint="#FFFFFF"
-            android:onClick="Agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFDFD"
+            android:onClick="enviarFormularioRegar"
             android:text="Agregar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#2196F3"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
