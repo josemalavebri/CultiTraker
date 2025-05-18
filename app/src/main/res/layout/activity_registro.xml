@@ -44,7 +44,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/txt_nombreParcela"
+                android:id="@+id/txt_correoRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -57,7 +57,7 @@
                 android:textSize="19sp" />
 
             <EditText
-                android:id="@+id/txt_tamanoParcela"
+                android:id="@+id/txt_contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -77,7 +77,7 @@
                 android:weightSum="3">
 
                 <Button
-                    android:id="@+id/btn_guardarParcelas"
+                    android:id="@+id/btn_guardarRegistro"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/btn_salirPacerlas"
+                    android:id="@+id/btn_salirRegistro"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
                     android:fontFamily="sans-serif-black"
-                    android:onClick="cancelarRegistro"
+                    android:onClick="eventoCancelarRegistro"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />

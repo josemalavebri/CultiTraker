@@ -49,17 +49,14 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
 
-    public void cancelarRegistro(View view){
+    public void eventoCancelarRegistro(View view){
         Intent intent = new Intent(this,IniciarSesion.class);
-        reseteoObjetos();
         startActivity(intent);
     }
+
     private void reseteoObjetos(){
         ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
         ((EditText)findViewById(R.id.txt_TipoRiego)).setText("");
         ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
-
     }
-
-
 }

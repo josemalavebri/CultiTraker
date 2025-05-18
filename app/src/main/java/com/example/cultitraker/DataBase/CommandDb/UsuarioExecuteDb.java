@@ -29,15 +29,18 @@ public class UsuarioExecuteDb {
     public boolean consultarPorEmailPassword(Usuario usuario) {
         String condicion1 = "email = ?";
         String condicion2 = "password = ?";
-        var emailExist = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion1, new String[]{String.valueOf(usuario.getEmail())});
-        if(emailExist == null){
+        Cursor emailExist = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion1, new String[]{String.valueOf(usuario.getEmail())});
+        if(emailExist != null && emailExist.moveToFirst()){
+            Cursor passwordExist = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion2, new String[]{String.valueOf(usuario.getPassword())});
+            if (passwordExist != null && passwordExist.moveToFirst()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else{
             return false;
         }
-        var passwordExist = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion2, new String[]{String.valueOf(usuario.getPassword())});
-        if(passwordExist == null){
-            return false;
-        }
-        return true;
+
     }
 
     public ArrayList<Usuario> consultarDatos() {
