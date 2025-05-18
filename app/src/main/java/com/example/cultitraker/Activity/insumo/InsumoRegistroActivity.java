@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class InsumoRegistroActivity extends AppCompatActivity {
+    private InsumoExecuteDB insumoExecuteDB;
     private TipoInsumo[] tipoInsumo;
     private Spinner spinner;
     private MaterialButton button;
@@ -44,6 +46,8 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     private EditText proveedor;
     private EditText cantidad;
     private Spinner tipo;
+    private boolean isEdit;
+    private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     }
     @SuppressLint("CutPasteId")
     private void initComponent(){
+        insumoExecuteDB = new InsumoExecuteDB(this);
         tipoInsumo = TipoInsumo.values();
         spinner = findViewById(R.id.txt_TipoInsumo);
         button = findViewById(R.id.btn_FechaInsumo);
@@ -66,7 +71,32 @@ public class InsumoRegistroActivity extends AppCompatActivity {
         proveedor = findViewById(R.id.txt_ProveInsumo);
         tipo = findViewById(R.id.txt_TipoInsumo);
         fecha =findViewById(R.id.txt_FechaInsumo);
+        isEdit = getIntent().getBooleanExtra("isEdit",false);
+        id=getIntent().getIntExtra("id",0);
         tiposInsumos();
+        if (isEdit) agregarDatosForm();
+    }
+    private void agregarDatosForm(){
+        ArrayList<Insumo>insumos=insumoExecuteDB.consultarPorId(id);
+        if(insumos!=null){
+            nombre.setText(insumos.get(0).getNombre());
+            cantidad.setText(String.valueOf(insumos.get(0).getCantidad()));
+            fecha.setText(insumos.get(0).getFecha());
+            proveedor.setText(insumos.get(0).getProveedor());
+            String tipoGuardado = insumos.get(0).getTipo();
+            SpinnerAdapter adapter = tipo.getAdapter();
+
+            for (int i = 0; i < adapter.getCount(); i++) {
+                Object item = adapter.getItem(i);
+                if (item instanceof TipoInsumo && item.toString().equals(tipoGuardado)) {
+                    tipo.setSelection(i);
+                    break;
+                }
+            }
+        }
+        else {
+            Toast.makeText(this,"No se encontraron datos",Toast.LENGTH_LONG).show();
+        }
     }
     private void tiposInsumos(){
         List<Object> listaInsumos = new ArrayList<>();
@@ -108,6 +138,7 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     }
     private Insumo crearInsumo(){
         Insumo insumo = new Insumo();
+        insumo.setId(isEdit?id:0);
         insumo.setNombre(nombre.getText().toString());
         insumo.setTipo(tipo.getSelectedItem().toString());
         insumo.setCantidad(Integer.parseInt(cantidad.getText().toString()));
@@ -117,17 +148,26 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     }
     public void RegistrarInsumo(View v){
         Insumo insumo = crearInsumo();
-        Log.d("Insumo", insumo.toString());
-        InsumoExecuteDB insumoExecuteDB = new InsumoExecuteDB(this);
-        boolean isValid = insumoExecuteDB.agregarDatos(insumo);
-        if(isValid){
-            Toast.makeText(this,"Insumo Guardado con Exito",Toast.LENGTH_LONG).show();
+        boolean isValido=isEdit?insumoExecuteDB.actualizarDatos(insumo):insumoExecuteDB.agregarDatos(insumo);
+        if(isValido){
+            Toast.makeText(this, "Registro"+(isEdit?" actualizado":" guardado"), Toast.LENGTH_LONG).show();
             limpiar();
-            Intent intent = new Intent(this, InsumoActivity.class);
-            startActivity(intent);
-        } else{
+            ventanaPrincipal();
+        }
+        else {
             Toast.makeText(this,"Insumo no Guardado",Toast.LENGTH_LONG).show();
         }
+        isEdit=false;
+        //Log.d("Insumo", insumo.toString());
+//        boolean isValid = insumoExecuteDB.agregarDatos(insumo);
+//        if(isValid){
+//            Toast.makeText(this,"Insumo Guardado con Exito",Toast.LENGTH_LONG).show();
+//            limpiar();
+//            Intent intent = new Intent(this, InsumoActivity.class);
+//            startActivity(intent);
+//        } else{
+//            Toast.makeText(this,"Insumo no Guardado",Toast.LENGTH_LONG).show();
+//        }
     }
     private void ventanaPrincipal(){
         Intent intent = new Intent(this, InsumoActivity.class);
@@ -142,5 +182,6 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     }
     public void cancelar(View v){
         limpiar();
+        ventanaPrincipal();
     }
 }

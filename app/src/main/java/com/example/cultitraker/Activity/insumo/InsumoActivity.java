@@ -22,9 +22,9 @@ import com.example.cultitraker.R;
 import java.util.ArrayList;
 
 public class InsumoActivity extends AppCompatActivity {
-    private int id;
     private InsumoExecuteDB insumoExecuteDB;
     private RecyclerView recyclerView;
+    private ArrayList<Integer>idInsumos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,49 +38,47 @@ public class InsumoActivity extends AppCompatActivity {
         initComponent();
     }
     private void initComponent(){
-        id=0;
         insumoExecuteDB = new InsumoExecuteDB(this);
         recyclerView = findViewById(R.id.recyclerViewInsumo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cargarDatosInsumo();
     }
-    private ArrayList<Integer>idInsumos;
     public void cargarDatosInsumo(){
         ArrayList<Insumo> insumos = cargarDatosInsumoDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
         idInsumos=new ArrayList<>();
         for(Insumo insumo : insumos){
             AdapterModel adapterModel = new AdapterModel();
-            //int [] ids= new int[]{insumo.getId()};
             idInsumos.add(insumo.getId());
             adapterModel.setTitulo(insumo.getNombre());
             adapterModel.setSubTitulo(insumo.getTipo());
             adapterModel.setParrafo(String.valueOf(insumo.getCantidad()));
             adapterModel.setDetail(insumo.getProveedor());
             adapterModels.add(adapterModel);
-            //Log.d("IDS", "ids: " + Arrays.toString(ids));
         }
         //ENVIAR SUS CARD ITEMS CON SU ID
         AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item);
         adapterGeneral.setOnItemClickListener(v -> {
             int position = (int) v.getTag();
             int id = idInsumos.get(position);
-            Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
+            actualizarRegistro(id);
         });
         recyclerView.setAdapter(adapterGeneral);
+    }
 
-    }
-    private ArrayList<Insumo>cargarDatosInsumoDB(){
-        return insumoExecuteDB.consultarInsumos();
-    }
-    public void Agregar(View v){
-        Intent intent = new Intent(this, InsumoRegistroActivity.class);
-        startActivity(intent);
-    }
-    private void ventanaRegistro(View V){
+    private void actualizarRegistro(int id) {
         Intent intent = new Intent(this, InsumoRegistroActivity.class);
         intent.putExtra("id",id);
         intent.putExtra("isEdit",true);
+        startActivity(intent);
+        Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
+    }
+
+    private ArrayList<Insumo>cargarDatosInsumoDB(){
+        return insumoExecuteDB.consultarInsumos();
+    }
+    public void agregarRegistro(View v){
+        Intent intent = new Intent(this, InsumoRegistroActivity.class);
         startActivity(intent);
     }
 }
