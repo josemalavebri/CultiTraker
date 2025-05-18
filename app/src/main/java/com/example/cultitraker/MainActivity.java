@@ -12,8 +12,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cultitraker.Activity.Cultivo.CultivoFrag;
+import com.example.cultitraker.Activity.insumo.InsumoFrag;
 import com.example.cultitraker.Activity.parcela.ParcelaFrag;
 import com.example.cultitraker.Activity.parcela.ParcelaTierraFrag;
+import com.example.cultitraker.Activity.tareas.TareasFragment;
 import com.example.cultitraker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_main);
+        setContentView(activityMainBinding.getRoot());
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -33,22 +35,26 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         cambiarFragment(new ParcelaTierraFrag());
-        activityMainBinding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
+        activityMainBinding.bnvPrincipal.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.parcelaMenu) {
-                cambiarFragment(new ParcelaFrag());
+                cambiarFragment(new ParcelaTierraFrag());
+            } else if (id == R.id.cultivoMenu) {
+                cambiarFragment(new CultivoFrag());
+            } else if (id == R.id.tareaMenu) {
+                cambiarFragment(new TareasFragment());
             }
-
+            else if (id == R.id.riegosMenu) {
+                cambiarFragment(new InsumoFrag());
+            }
             return true;
-        }
-        );
+        });
     }
 
     private void cambiarFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        fragmentTransaction.replace(R.id.frl_principal,fragment);
         fragmentTransaction.commit();
 
     }

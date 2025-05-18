@@ -28,11 +28,12 @@ public class RegarFormularioActivity extends AppCompatActivity {
     }
 
     public void agregarDatos(View view){
+        /*
         Regar regar = new Regar();
         EditText txtHora = findViewById(R.id.txt_Hora);
         EditText txtCantidadAgua = findViewById(R.id.txt_CantidadAgua);
         EditText txtTipoRiego = findViewById(R.id.txt_TipoRiego);
         String hora = txtHora.getText().toString();
-
+        */
     }
 }

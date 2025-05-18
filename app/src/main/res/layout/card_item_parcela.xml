@@ -71,7 +71,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/cultivo" />
+            android:src="@drawable/cultivo_icon" />
 
         <!-- Imagen a la derecha -->
     </LinearLayout>

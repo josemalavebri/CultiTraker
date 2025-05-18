@@ -22,4 +22,6 @@ public class CultivoRegistroActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+
 }

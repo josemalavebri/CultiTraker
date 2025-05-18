@@ -3,10 +3,7 @@ package com.example.cultitraker.Activity.Cultivo;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,21 +13,13 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cultitraker.Activity.parcela.ParcelaRegistroActivity;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
 import com.example.cultitraker.Models.Cultivo;
 import com.example.cultitraker.R;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class CultivoActivity extends AppCompatActivity {
 
@@ -43,7 +32,7 @@ public class CultivoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cultivo);
         recyclerView = findViewById(R.id.recyclerViewCultivo);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //cargarDatosParcela();
+        cargarDatosCultivos();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -52,7 +41,7 @@ public class CultivoActivity extends AppCompatActivity {
         });
     }
 
-    public void cargarDatosParcela(){
+    public void cargarDatosCultivos(){
         ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Parcela"
+        android:icon="@drawable/verdor"
+        android:id="@+id/parcelaMenu" />
+    <item android:title="Cultivo"
+        android:icon="@drawable/cultivo_icon"
+        android:id="@+id/cultivoMenu"
+        />
+    <item android:title="Tareas"
+        android:icon="@drawable/libro"
+        android:id="@+id/tareaMenu"
+        />
+    <item android:title="Riegos"
+        android:icon="@drawable/cubo_agua"
+        android:id="@+id/riegosMenu"
+        />
+    <item android:title="Insumos"
+        android:icon="@drawable/azada"
+        android:id="@+id/insumosMenu"
+        />
+</menu>
