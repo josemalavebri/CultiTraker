@@ -61,9 +61,7 @@ public class BlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        recyclerView = findViewById(R.id.recyclerViewCultivo);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //cargarDatosParcela();
+
         return inflater.inflate(R.layout.fragment_blank, container, false);
     }
 

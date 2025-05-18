@@ -37,19 +37,8 @@ public class IniciarSesion extends AppCompatActivity {
     }
 
     public void loginButtonAction(View view){
-        Usuario usuario = crearUsuarioData();
-        Intent intent = new Intent(this, CultivoActivity.class);
-
-        UsuarioExecuteDb usuarioExecuteDb = new UsuarioExecuteDb(this);
-        boolean isValid = usuarioExecuteDb.consultarPorEmailPassword(usuario);
-        if(isValid){
-            startActivity(intent);
-            Log.d("RegarDebug", "Entrando a CultivoActivity");
-            Toast.makeText(this, "CultivoActivity abierta", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this,"Sesion Iniciada",Toast.LENGTH_LONG).show();
-        } else{
-            Toast.makeText(this,"Sesion Fallida",Toast.LENGTH_LONG).show();
-        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private Usuario crearUsuarioData(){

@@ -1,4 +1,4 @@
-package com.example.cultitraker.Activity.Cultivo;
+package com.example.cultitraker.Activity.parcela;
 
 import android.os.Bundle;
 
@@ -12,20 +12,18 @@ import android.view.ViewGroup;
 
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
-import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
-import com.example.cultitraker.Models.Cultivo;
+import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
+import com.example.cultitraker.Models.Parcela;
 import com.example.cultitraker.R;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CultivoFrag#newInstance} factory method to
+ * Use the {@link ParcelaTierraFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CultivoFrag extends Fragment {
-
-    private RecyclerView recyclerView;
+public class ParcelaTierraFrag extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +34,12 @@ public class CultivoFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CultivoFrag() {
+
+
+    RecyclerView recyclerView;
+
+
+    public ParcelaTierraFrag() {
         // Required empty public constructor
     }
 
@@ -46,11 +49,11 @@ public class CultivoFrag extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CultivoFrag.
+     * @return A new instance of fragment parcelaTierra.
      */
     // TODO: Rename and change types and number of parameters
-    public static CultivoFrag newInstance(String param1, String param2) {
-        CultivoFrag fragment = new CultivoFrag();
+    public static ParcelaTierraFrag newInstance(String param1, String param2) {
+        ParcelaTierraFrag fragment = new ParcelaTierraFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,43 +64,45 @@ public class CultivoFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_cultivo, container, false);
-        recyclerView = view.findViewById(R.id.recyclerViewCultivo);
+        View view = inflater.inflate(R.layout.fragment_parcela, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewParcelas);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         cargarDatosParcela();
-        return view;
+        return inflater.inflate(R.layout.fragment_parcela_tierra, container, false);
+
     }
 
-
     private void cargarDatosParcela() {
-        ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
+        ArrayList<Parcela> parcelas = cargarDatosParcelaDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
-        for (Cultivo cultivo : cultivos) {
+        for (Parcela parcela : parcelas) {
             AdapterModel adapterModel = new AdapterModel();
-            adapterModel.setTitulo(cultivo.getNombre());
-            adapterModel.setSubTitulo(cultivo.getTipo());
-            adapterModel.setParrafo(cultivo.getFechaSiembra());
+            adapterModel.setTitulo(parcela.getNombre());
+            adapterModel.setSubTitulo(parcela.getCultivo());
+            adapterModel.setParrafo(String.valueOf(parcela.getTamano()));
+            adapterModel.setDetail(String.valueOf(parcela.getCantidadCultivo()));
             adapterModels.add(adapterModel);
         }
 
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
+        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_parcela);
         recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<Cultivo> cargarDatosParcelaDB() {
-        CultivoExecuteDb cultivoExecuteDb = new CultivoExecuteDb(requireContext());
-        return cultivoExecuteDb.consultarDatos();
+    private ArrayList<Parcela> cargarDatosParcelaDB() {
+        ParcelaExecuteDb parcelaExecuteDb = new ParcelaExecuteDb(requireContext());
+        return parcelaExecuteDb.consultarDatos();
     }
+
 }

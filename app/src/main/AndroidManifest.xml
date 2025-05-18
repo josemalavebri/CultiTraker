@@ -42,7 +42,7 @@
         -->
 
         <activity
-            android:name=".PrincipalActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".IniciarSesion"

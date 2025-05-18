@@ -87,8 +87,8 @@ public class ParcelaFrag extends Fragment {
             return insets;
         });
 
-        FloatingActionButton btnAgregar = view.findViewById(R.id.btnAgregarParcela);
-        btnAgregar.setOnClickListener(v -> abrirParcelaRegistroFragment());
+        FloatingActionButton btnAgregar = view.findViewById(R.id.btn_Agregar);
+        //btnAgregar.setOnClickListener(v -> abrirParcelaRegistroFragment());
 
         return view;
     }
@@ -115,11 +115,4 @@ public class ParcelaFrag extends Fragment {
         return parcelaExecuteDb.consultarDatos();
     }
 
-    //Este es el fragmento para poder abrir el otro  fragmento el fragment container se debe de agregar
-    private void abrirParcelaRegistroFragment() {
-        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, new ParcelaRegistroFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 }

@@ -30,7 +30,7 @@ public class ParcelaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_parcela);
+//        setContentView(R.layout.);
 
         //PONER SUS RECYCLER VIEW CON SU ID
         recyclerView = findViewById(R.id.recyclerViewParcelas);
