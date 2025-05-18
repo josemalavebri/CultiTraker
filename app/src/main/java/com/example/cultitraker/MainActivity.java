@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.cultitraker.Activity.Cultivo.CultivoFrag;
 import com.example.cultitraker.Activity.insumo.InsumoFrag;
-import com.example.cultitraker.Activity.parcela.ParcelaFrag;
 import com.example.cultitraker.Activity.parcela.ParcelaTierraFrag;
 import com.example.cultitraker.Activity.regar.RiegoFrag;
 import com.example.cultitraker.Activity.tareas.TareasFragment;

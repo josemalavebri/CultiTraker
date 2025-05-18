@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="agregarEvento"
     tools:context=".Activity.parcela.ParcelaTierraFrag">
 
     <LinearLayout
@@ -40,12 +41,12 @@
             android:layout_height="524dp" />
 
         <Button
-            android:id="@+id/btn_Agregar"
+            android:id="@+id/btn_AgregarParcela"
             style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
-            android:onClick="agregarActionButton"
+            android:onClick="agregarEvento"
             android:text="Agregar"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

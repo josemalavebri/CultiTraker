@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
@@ -33,7 +34,6 @@ public class ParcelaTierraFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
 
 
     RecyclerView recyclerView;
@@ -74,14 +74,26 @@ public class ParcelaTierraFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_parcela, container, false);
+        View view = inflater.inflate(R.layout.fragment_parcela_tierra, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerViewParcelas);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         cargarDatosParcela();
-        return inflater.inflate(R.layout.fragment_parcela_tierra, container, false);
 
+        Button button = view.findViewById(R.id.btn_AgregarParcela);
+        button.setOnClickListener(v -> {
+            ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frl_principal, nuevoFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+        return view;
     }
+
 
     private void cargarDatosParcela() {
         ArrayList<Parcela> parcelas = cargarDatosParcelaDB();
@@ -104,5 +116,8 @@ public class ParcelaTierraFrag extends Fragment {
         ParcelaExecuteDb parcelaExecuteDb = new ParcelaExecuteDb(requireContext());
         return parcelaExecuteDb.consultarDatos();
     }
+
+
+
 
 }
