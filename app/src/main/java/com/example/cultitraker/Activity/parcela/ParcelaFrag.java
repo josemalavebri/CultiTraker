@@ -6,7 +6,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,7 +86,7 @@ public class ParcelaFrag extends Fragment {
             return insets;
         });
 
-        FloatingActionButton btnAgregar = view.findViewById(R.id.btn_Agregar);
+        FloatingActionButton btnAgregar = view.findViewById(R.id.btn_AgregarRiego);
         //btnAgregar.setOnClickListener(v -> abrirParcelaRegistroFragment());
 
         return view;
