@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondoregar"
-    tools:context=".Activity.regar.fragment_riego_registro">
+    tools:context=".Activity.regar.RiegoRegistroFrag">
 
     <LinearLayout
 
@@ -25,6 +25,35 @@
             android:textColor="@color/purple"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/txt_FechaInsumo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext"
+                android:clickable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Fecha"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColorHint="#070707" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_FechaInsumo"
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:textColorHighlight="@color/blue"
+                android:textColorLink="@color/blue" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/txt_Hora"
