@@ -34,7 +34,7 @@ public class RegistroActivity extends AppCompatActivity {
         Usuario usuario = new Usuario();
         usuario.setId(0);
         usuario.setEmail(((EditText)findViewById(R.id.txt_cantidadParcela)).getText().toString());
-        usuario.setPassword(((EditText)findViewById(R.id.txt_)).getText().toString());
+        usuario.setPassword(((EditText)findViewById(R.id.txt_TipoRiego)).getText().toString());
         return usuario;
     }
 
@@ -56,7 +56,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
     private void reseteoObjetos(){
         ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
-        ((EditText)findViewById(R.id.txt_)).setText("");
+        ((EditText)findViewById(R.id.txt_TipoRiego)).setText("");
         ((EditText)findViewById(R.id.txt_cantidadParcela)).setText("");
 
     }

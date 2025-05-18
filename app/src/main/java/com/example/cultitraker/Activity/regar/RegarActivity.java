@@ -29,7 +29,7 @@ public class RegarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_regar);
-        recyclerView = findViewById(R.id.recyclerViewRegar);
+        recyclerView = findViewById(R.id.recyclerViewRiego);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cargarDatosRegar();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

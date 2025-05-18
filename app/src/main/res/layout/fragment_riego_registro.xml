@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/roca"
-    tools:context=".Activity.parcela.ParcelaRegistroFragment">
+    android:background="@drawable/fondoregar"
+    tools:context=".Activity.regar.fragment_riego_registro">
 
     <LinearLayout
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,22 +17,22 @@
         android:padding="30dp">
 
         <TextView
-            android:id="@+id/txt_nuevoParcela"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10sp"
-            android:text="Nueva Parcela"
+            android:text="Nuevo Riego"
             android:textAlignment="center"
             android:textColor="@color/purple"
             android:textSize="36sp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txt_Hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/custom_edittext"
-            android:hint="nombre"
+            android:hint="Hora"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="@android:color/black"
@@ -40,25 +40,17 @@
             android:textSize="19sp" />
 
         <EditText
+            android:id="@+id/txt_CantidadAgua"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Tamaño"
+            android:hint="Cantidad de agua"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/black"
             android:textSize="19sp" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            style="@android:style/Widget.Material.Spinner.Underlined"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/custom_edittext"
-            android:scrollbarStyle="outsideInset" />
 
         <EditText
             android:id="@+id/txt_TipoRiego"
@@ -66,23 +58,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/custom_edittext"
-            android:hint="Cultivo"
+            android:hint="Tipo de riego"
             android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/black"
             android:textSize="19sp" />
-
-        <EditText
-            android:id="@+id/txt_cantidadParcela"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/custom_edittext"
-            android:hint="Cantidad cultivo"
-            android:inputType="number"
-            android:padding="12dp"
-            android:textColorHint="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
