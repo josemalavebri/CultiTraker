@@ -29,6 +29,7 @@
                 android:fontFamily="@font/minecrafter"
                 android:gravity="center"
                 android:text="Parcelas"
+                android:textColor="#F1F1F1"
                 android:textSize="34dp" />
 
         </LinearLayout>

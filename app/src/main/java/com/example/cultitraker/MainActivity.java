@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         cambiarFragment(new ParcelaTierraFrag());
         activityMainBinding.bnvPrincipal.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
             }
               else if (id == R.id.riegosMenu) {
                 cambiarFragment(new RiegoFrag());
+            }
+            else if (id == R.id.insumosMenu) {
+                cambiarFragment(new InsumoFrag());
             }
             return true;
         });

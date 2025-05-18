@@ -32,6 +32,7 @@
                 android:fontFamily="@font/minecrafter"
                 android:gravity="center"
                 android:text="Tareas"
+                android:textColor="#F1EEEE"
                 android:textSize="34dp" />
 
         </LinearLayout>
