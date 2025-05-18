@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.cultitraker.Activity.Cultivo.CultivoRegistroFrag;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.RegarExecuteDb;
@@ -71,9 +73,22 @@ public class RiegoFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_riego, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerViewRiego);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        //cargarDatosRiego();
+        cargarDatosRiego();
+
+        Button button = view.findViewById(R.id.btn_AgregarRiego);
+        button.setOnClickListener(v -> {
+            RiegoRegistroFrag nuevoFragment = new RiegoRegistroFrag();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frl_principal, nuevoFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
     }
 

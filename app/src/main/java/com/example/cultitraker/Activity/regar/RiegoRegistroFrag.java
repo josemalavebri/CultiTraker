@@ -79,14 +79,12 @@ public class RiegoRegistroFrag extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_riego_registro, container, false);
 
-        spinnerTipoInsumo = view.findViewById(R.id.txt_TipoInsumo);
         fechaInsumo = view.findViewById(R.id.txt_FechaInsumo);
         btnFechaInsumo = view.findViewById(R.id.btn_FechaInsumo);
 
         TipoInsumo[] tipoInsumo = TipoInsumo.values();
         ArrayAdapter<TipoInsumo> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, tipoInsumo);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTipoInsumo.setAdapter(adapter);
 
         btnFechaInsumo.setOnClickListener(v -> {
             MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker()

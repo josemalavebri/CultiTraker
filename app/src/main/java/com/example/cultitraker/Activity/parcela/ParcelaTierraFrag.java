@@ -80,7 +80,7 @@ public class ParcelaTierraFrag extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         cargarDatosParcela();
 
-        Button button = view.findViewById(R.id.btn_AgregarParcela);
+        Button button = view.findViewById(R.id.btn_AgregarInsumo);
         button.setOnClickListener(v -> {
             ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
@@ -73,41 +74,22 @@ public class TareasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_tareas, container, false);
         View view = inflater.inflate(R.layout.fragment_tareas, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerViewTareas);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         cargarDatosTarea();
-        /* Aqui se encuntra el boton para agregar, solo se necesita el fragment container de la activity
-        View botonAgregar = view.findViewById(R.id.button7);
-        botonAgregar.setOnClickListener(v -> {
-            TareaRegistro fragment = new TareaRegistro();
-            requireActivity().getSupportFragmentManager()
+
+        Button button = view.findViewById(R.id.btn_AgregarTarea);
+        button.setOnClickListener(v -> {
+            TareaRegistro nuevoFragment = new TareaRegistro();
+
+            requireActivity()
+                    .getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)  // Asegúrate que fragment_container sea el ID del contenedor donde quieres mostrar el fragment
-                    .addToBackStack(null) // Esto es opcional, para poder volver atrás con el botón de retroceso
+                    .replace(R.id.frl_principal, nuevoFragment)
+                    .addToBackStack(null)
                     .commit();
-        });
-        */
-        //No funciona usar ese metodo "callback" declarado asi, los fragments no se pueden llmar con intents
-        /*View botonAgregar = view.findViewById(R.id.button7);
-        botonAgregar.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), TareaRegistroActivity.class);
-            startActivity(intent);
-        });*/
-        //este usa el id:main en cambio los fragments no tienen
-        /*
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        */
-        ViewCompat.setOnApplyWindowInsetsListener(view, (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
         });
         return view;
     }

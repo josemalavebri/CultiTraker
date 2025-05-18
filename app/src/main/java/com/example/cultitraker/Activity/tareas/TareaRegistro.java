@@ -3,13 +3,17 @@ package com.example.cultitraker.Activity.tareas;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cultitraker.Activity.regar.RiegoRegistroFrag;
 import com.example.cultitraker.DataBase.CommandDb.TareasExecuteDb;
 import com.example.cultitraker.Models.Tareas;
 import com.example.cultitraker.R;
@@ -20,6 +24,8 @@ import com.example.cultitraker.R;
  * create an instance of this fragment.
  */
 public class TareaRegistro extends Fragment {
+
+    private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,26 +69,11 @@ public class TareaRegistro extends Fragment {
         }
     }
 
-    // se usa el de aqui, el onCreate no se utiliza.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_tarea_registro, container, false);
-        View view = inflater.inflate(R.layout.fragment_tarea_registro, container, false);
-        // Referencias a los EditText
-        tipoActividad = view.findViewById(R.id.txt_tipoActividad);
-        descripcion = view.findViewById(R.id.txt_descripcionActividad);
-        fecha = view.findViewById(R.id.txt_fechaActividad);
-        estado = view.findViewById(R.id.txt_estadoActividad);
-
-        // Botón guardar
-        view.findViewById(R.id.btn_guardar).setOnClickListener(v -> registrarTarea());
-
-        // Botón cancelar
-        view.findViewById(R.id.btn_salir).setOnClickListener(v -> cancelarTarea());
-
-        return view;
+        return inflater.inflate(R.layout.fragment_tarea_registro, container, false);
     }
 
     private Tareas crearTareaData() {

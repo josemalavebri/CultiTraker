@@ -2,6 +2,9 @@ package com.example.cultitraker.Activity.Cultivo;
 
 import android.os.Bundle;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.cultitraker.Activity.parcela.ParcelaRegistroFragment;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
 import com.example.cultitraker.Models.Cultivo;
 import com.example.cultitraker.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -72,16 +78,32 @@ public class CultivoFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View view = inflater.inflate(R.layout.fragment_cultivo, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerViewCultivo);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        cargarDatosParcela();
+        cargarDatosCultivo();
+
+        Button button = view.findViewById(R.id.btn_AgregarCultivo);
+        button.setOnClickListener(v -> {
+            CultivoRegistroFrag nuevoFragment = new CultivoRegistroFrag();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frl_principal, nuevoFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
         return view;
+
     }
 
 
-    private void cargarDatosParcela() {
-        ArrayList<Cultivo> cultivos = cargarDatosParcelaDB();
+    private void cargarDatosCultivo() {
+        ArrayList<Cultivo> cultivos = cargarDatosCultivoDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
         for (Cultivo cultivo : cultivos) {
@@ -96,7 +118,7 @@ public class CultivoFrag extends Fragment {
         recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<Cultivo> cargarDatosParcelaDB() {
+    private ArrayList<Cultivo> cargarDatosCultivoDB() {
         CultivoExecuteDb cultivoExecuteDb = new CultivoExecuteDb(requireContext());
         return cultivoExecuteDb.consultarDatos();
     }
