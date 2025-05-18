@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cultivo_icon"
     tools:context=".Activity.Cultivo.CultivoFrag">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/cultivo"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="10dp"
