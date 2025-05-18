@@ -4,15 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondoregar"
-    tools:context=".fragment_riego_registro">
+    tools:context=".Activity.regar.fragment_riego_registro">
 
     <LinearLayout
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -22,7 +17,6 @@
         android:padding="30dp">
 
         <TextView
-            android:id="@+id/txt_nuevoParcela"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10sp"
@@ -33,6 +27,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txt_Hora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -45,6 +40,7 @@
             android:textSize="19sp" />
 
         <EditText
+            android:id="@+id/txt_CantidadAgua"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -57,7 +53,7 @@
             android:textSize="19sp" />
 
         <EditText
-            android:id="@+id/txt_"
+            android:id="@+id/txt_TipoRiego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"

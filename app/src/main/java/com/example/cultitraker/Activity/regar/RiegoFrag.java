@@ -1,4 +1,4 @@
-package com.example.cultitraker.Activity.insumo;
+package com.example.cultitraker.Activity.regar;
 
 import android.os.Bundle;
 
@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
-import com.example.cultitraker.DataBase.CommandDb.InsumoExecuteDB;
 import com.example.cultitraker.DataBase.CommandDb.RegarExecuteDb;
-import com.example.cultitraker.Models.Insumo;
 import com.example.cultitraker.Models.Regar;
 import com.example.cultitraker.R;
 
@@ -22,10 +20,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InsumoFrag#newInstance} factory method to
+ * Use the {@link RiegoFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class InsumoFrag extends Fragment {
+public class RiegoFrag extends Fragment {
 
     private RecyclerView recyclerView;
 
@@ -38,7 +36,7 @@ public class InsumoFrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public InsumoFrag() {
+    public RiegoFrag() {
         // Required empty public constructor
     }
 
@@ -48,11 +46,11 @@ public class InsumoFrag extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment InsumoFrag.
+     * @return A new instance of fragment fragment_riego.
      */
     // TODO: Rename and change types and number of parameters
-    public static InsumoFrag newInstance(String param1, String param2) {
-        InsumoFrag fragment = new InsumoFrag();
+    public static RiegoFrag newInstance(String param1, String param2) {
+        RiegoFrag fragment = new RiegoFrag();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,20 +71,24 @@ public class InsumoFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_insumo, container, false);
-        recyclerView = view.findViewById(R.id.recyclerViewInsumo);
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_riego, container, false);
+        recyclerView = view.findViewById(R.id.recyclerViewRiego);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        cargarDatosInsumo();
+        cargarDatosRiego();
         return view;
     }
 
-    private void cargarDatosInsumo() {
-        ArrayList<Insumo> insumos = cargarDatosInsumoDB();
+    private void cargarDatosRiego() {
+        ArrayList<Regar> riegos = cargarDatosRiegoDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
-        for (Insumo insumo : insumos) {
+        for (Regar riego : riegos) {
             AdapterModel adapterModel = new AdapterModel();
-            //adapterModel.setDetail(String.valueOf(insumo.get()));
+            adapterModel.setTitulo(riego.getFecha()+riego.getHora());
+            adapterModel.setSubTitulo(riego.getCantidadAgua() + " L");
+            adapterModel.setParrafo(riego.getMetodoRiego());
+            adapterModel.setDetail(String.valueOf(riego.getParcelaId()));
             adapterModels.add(adapterModel);
         }
 
@@ -94,9 +96,8 @@ public class InsumoFrag extends Fragment {
         recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<Insumo> cargarDatosInsumoDB() {
-        InsumoExecuteDB insumoExecuteDb = new InsumoExecuteDB(requireContext());
-        //return insumoExecuteDb.consultarDatos();
-        return new ArrayList<>();
+    private ArrayList<Regar> cargarDatosRiegoDB() {
+        RegarExecuteDb riegoExecuteDb = new RegarExecuteDb(requireContext());
+        return riegoExecuteDb.consultarDatos();
     }
 }

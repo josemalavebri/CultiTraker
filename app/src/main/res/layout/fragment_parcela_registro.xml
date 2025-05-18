@@ -61,7 +61,7 @@
             android:scrollbarStyle="outsideInset" />
 
         <EditText
-            android:id="@+id/txt_"
+            android:id="@+id/txt_TipoRiego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"

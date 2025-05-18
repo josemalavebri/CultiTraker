@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_riego">
+    tools:context=".Activity.regar.RiegoFrag">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewRegar"
+            android:id="@+id/recyclerViewRiego"
             android:layout_width="match_parent"
             android:layout_height="524dp" />
 

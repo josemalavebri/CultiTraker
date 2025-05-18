@@ -15,6 +15,7 @@ import com.example.cultitraker.Activity.Cultivo.CultivoFrag;
 import com.example.cultitraker.Activity.insumo.InsumoFrag;
 import com.example.cultitraker.Activity.parcela.ParcelaFrag;
 import com.example.cultitraker.Activity.parcela.ParcelaTierraFrag;
+import com.example.cultitraker.Activity.regar.RiegoFrag;
 import com.example.cultitraker.Activity.tareas.TareasFragment;
 import com.example.cultitraker.databinding.ActivityMainBinding;
 
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.tareaMenu) {
                 cambiarFragment(new TareasFragment());
             }
-            else if (id == R.id.riegosMenu) {
-                cambiarFragment(new InsumoFrag());
+              else if (id == R.id.riegosMenu) {
+                cambiarFragment(new RiegoFrag());
             }
             return true;
         });
