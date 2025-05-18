@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlLiteDb extends SQLiteOpenHelper {
     public static final String DbName="Cultivos";
-    public static final int DbVersion=1;
+    public static final int DbVersion=3;
 
     private static final String TAG = "SqlLiteDb";
 
@@ -14,9 +14,13 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"email TEXT,"
             +"password TEXT)";
-    public static final String TABLA_INSUMO="CREATE TABLE InsumoActivity("+
+    public static final String TABLA_INSUMO="CREATE TABLE insumo("+
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            +"nombre TEXT,";
+            +"nombre TEXT," +
+            "tipo TEXT," +
+            "cantidad INTEGER," +
+            "fecha TEXT," +
+            "proveedor TEXT)";
 
     public static final String TABLA_PARCELA = "CREATE TABLE parcela (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -42,12 +46,13 @@ public class SqlLiteDb extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLA_USUARIO);
+        db.execSQL(TABLA_INSUMO);
         db.execSQL(TABLA_PARCELA);
         db.execSQL(TABLA_TAREAS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        
     }
 }

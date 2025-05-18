@@ -54,8 +54,8 @@ public class CultivoActivity extends AppCompatActivity {
         }
 
         //ENVIAR SUS CARD ITEMS CON SU ID
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
-        recyclerView.setAdapter(adapterGeneral);
+//        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque,);
+//        recyclerView.setAdapter(adapterGeneral);
     }
 
     private ArrayList<Cultivo> cargarDatosParcelaDB(){

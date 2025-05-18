@@ -1,74 +1,74 @@
 package com.example.cultitraker.Models;
 
 public class Insumo {
-    private int ID;
-    private String Nombre;
-    private String Tipo;
-    private int Cantidad;
-    private String Fecha;
-    private String Proveedor;
+    private int id;
+    private String nombre;
+    private String tipo;
+    private int cantidad;
+    private String fecha;
+    private String proveedor;
     public Insumo() {
-        ID = 0;
-        Nombre = "";
-        Tipo = "";
-        Cantidad = 0;
-        Fecha = "";
-        Proveedor = "";
+        id = 0;
+        nombre = "";
+        tipo = "";
+        cantidad = 0;
+        fecha = "";
+        proveedor = "";
     }
-    public Insumo(int ID, String Nombre, String Tipo, int Cantidad, String Fecha, String Proveedor) {
-        this.ID = ID;
-        this.Nombre = Nombre;
-        this.Tipo = Tipo;
-        this.Cantidad = Cantidad;
-        this.Fecha = Fecha;
-        this.Proveedor = Proveedor;
+    public Insumo(int id, String Nombre, String Tipo, int Cantidad, String Fecha, String Proveedor) {
+        this.id = id;
+        this.nombre = Nombre;
+        this.tipo = Tipo;
+        this.cantidad = Cantidad;
+        this.fecha = Fecha;
+        this.proveedor = Proveedor;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
     }
 
     public String getFecha() {
-        return Fecha;
+        return fecha;
     }
 
     public void setFecha(String fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
 
     public String getProveedor() {
-        return Proveedor;
+        return proveedor;
     }
 
     public void setProveedor(String proveedor) {
-        Proveedor = proveedor;
+        this.proveedor = proveedor;
     }
 
     public int getCantidad() {
-        return Cantidad;
+        return cantidad;
     }
 
     public void setCantidad(int cantidad) {
-        Cantidad = cantidad;
+        this.cantidad = cantidad;
     }
 }

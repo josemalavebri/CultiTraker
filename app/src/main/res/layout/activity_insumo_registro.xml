@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/piedra"
+    android:background="@drawable/roca"
     tools:context=".Activity.insumo.InsumoRegistroActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,6 +78,19 @@
                 android:padding="12dp"
                 android:textColorHint="#040404" />
 
+            <EditText
+                android:id="@+id/txt_ProveInsumo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:hint="Proveedor"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#0E0E0E"
+                android:textColorHint="#070707" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -127,6 +140,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/purple"
                     android:fontFamily="sans-serif-black"
+                    android:onClick="RegistrarInsumo"
                     android:text="Guardar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />
@@ -140,6 +154,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
                     android:fontFamily="sans-serif-black"
+                    android:onClick="cancelar"
                     android:text="Cancelar"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@android:color/white" />

@@ -9,13 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cultitraker.Models.Usuario;
 import com.example.cultitraker.R;
 
 import java.util.ArrayList;
 
-public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHolder>{
-
+public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHolder> {
+    private View.OnClickListener onItemClickListener;
     private final int layoutId;
     private ArrayList<AdapterModel> listaDatos = new ArrayList<>();
     private Context context;
@@ -24,11 +23,14 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
         this.context = context;
         this.layoutId = layoutId;
     }
-
+    public void setOnItemClickListener(View.OnClickListener listener) {
+        this.onItemClickListener = listener;
+    }
     @NonNull
     @Override
     public AdapterGeneral.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(layoutId, parent, false));
+        return new ViewHolder(LayoutInflater.from(context)
+                .inflate(layoutId, parent, false));
     }
 
     @Override
@@ -38,12 +40,17 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
         holder.txt_name.setText(adapterModel.getSubTitulo());
         holder.txt_subName.setText(adapterModel.getParrafo());
         holder.txt_detail.setText(adapterModel.getDetail());
+        holder.itemView.setTag(position);
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(onItemClickListener);
+        }
     }
 
     @Override
     public int getItemCount() {
         return listaDatos.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_titulo,txt_name,txt_subName,txt_detail;

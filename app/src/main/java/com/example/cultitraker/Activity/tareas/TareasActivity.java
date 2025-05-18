@@ -49,8 +49,8 @@ public class TareasActivity extends AppCompatActivity {
                 adapterModel.setDetail(tarea.getFecha());
                 adapterModels.add(adapterModel);
             }
-            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
-            recyclerView.setAdapter(adapterGeneral);
+//            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque, );
+//            recyclerView.setAdapter(adapterGeneral);
         }
     }
 
