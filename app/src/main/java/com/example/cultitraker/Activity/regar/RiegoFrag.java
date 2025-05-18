@@ -70,19 +70,16 @@ public class RiegoFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_riego, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewRiego);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        cargarDatosRiego();
+        //cargarDatosRiego();
         return view;
     }
 
     private void cargarDatosRiego() {
         ArrayList<Regar> riegos = cargarDatosRiegoDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
-
         for (Regar riego : riegos) {
             AdapterModel adapterModel = new AdapterModel();
             adapterModel.setTitulo(riego.getFecha()+riego.getHora());
@@ -91,7 +88,6 @@ public class RiegoFrag extends Fragment {
             adapterModel.setDetail(String.valueOf(riego.getParcelaId()));
             adapterModels.add(adapterModel);
         }
-
         AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
         recyclerView.setAdapter(adapterGeneral);
     }
@@ -100,4 +96,5 @@ public class RiegoFrag extends Fragment {
         RegarExecuteDb riegoExecuteDb = new RegarExecuteDb(requireContext());
         return riegoExecuteDb.consultarDatos();
     }
+
 }

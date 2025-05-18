@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/piedra"
-    tools:context=".Activity.insumo.InsumoActivity">
+    tools:context=".Activity.insumo.InsumoFrag">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -42,7 +42,7 @@
             android:layout_margin="10dp" />
 
         <Button
-            android:id="@+id/btn_AgregarRiego"
+            android:id="@+id/btn_AgregarParcela"
             style="@style/Widget.Material3.Button"
             android:layout_width="135dp"
             android:layout_height="62dp"

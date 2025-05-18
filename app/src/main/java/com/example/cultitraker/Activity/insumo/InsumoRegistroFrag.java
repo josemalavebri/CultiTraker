@@ -77,7 +77,7 @@ public class InsumoRegistroFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.activity_insumo_registro, container, false);
+        View view = inflater.inflate(R.layout.fragment_insumo_registro, container, false);
 
         spinnerTipoInsumo = view.findViewById(R.id.txt_TipoInsumo);
         fechaInsumo = view.findViewById(R.id.txt_FechaInsumo);
