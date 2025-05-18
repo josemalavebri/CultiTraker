@@ -45,14 +45,11 @@ public class CultivoActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //cargarDatosParcela();
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
     }
 
     public void cargarDatosParcela(){
@@ -61,7 +58,6 @@ public class CultivoActivity extends AppCompatActivity {
 
         for(Cultivo cultivo: cultivos) {
             AdapterModel adapterModel = new AdapterModel();
-
             adapterModel.setTitulo(cultivo.getNombre());
             adapterModel.setSubTitulo(cultivo.getTipo());
             adapterModel.setParrafo(cultivo.getFechaSiembra());
@@ -72,8 +68,6 @@ public class CultivoActivity extends AppCompatActivity {
         AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, this, R.layout.card_item_bloque);
         recyclerView.setAdapter(adapterGeneral);
     }
-
-
 
     private ArrayList<Cultivo> cargarDatosParcelaDB(){
         CultivoExecuteDb cultivoExecuteDb = new CultivoExecuteDb(this);
