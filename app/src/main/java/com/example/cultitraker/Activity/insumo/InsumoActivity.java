@@ -94,7 +94,6 @@ public class InsumoActivity extends AppCompatActivity {
         intent.putExtra("id",id);
         intent.putExtra("isEdit",true);
         startActivity(intent);
-        Toast.makeText(getApplicationContext(), String.valueOf(id), Toast.LENGTH_LONG).show();
     }
 
     private ArrayList<Insumo>cargarDatosInsumoDB(){
