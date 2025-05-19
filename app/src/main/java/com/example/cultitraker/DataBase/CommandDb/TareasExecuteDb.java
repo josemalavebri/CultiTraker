@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.example.cultitraker.DataBase.DbSqlLite.ExecuteDb;
 import com.example.cultitraker.Models.Tareas;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,11 +27,27 @@ public class TareasExecuteDb {
         datos.put(columnas[4], tarea.getFecha());
         return executeDb.agregarRegistroDB(TABLENAME, datos);
     }
+
+    public boolean actualizarDatos(Tareas tarea) {
+        Map<String, Object> datos = construirDatosTarea(tarea);
+        datos.put(columnas[0], tarea.getId());  // coloca el ID para el WHERE en el update
+        return executeDb.actualizarDatos(TABLENAME, datos);
+    }
+
+    private Map<String, Object> construirDatosTarea(Tareas tarea) {
+        Map<String, Object> datos = new HashMap<>();
+        datos.put(columnas[1], tarea.getTipoActividad());
+        datos.put(columnas[2], tarea.getDescripcion());
+        datos.put(columnas[3], tarea.getEstado());
+        datos.put(columnas[4], tarea.getFecha());
+        return datos;
+    }
+
     public ArrayList<Tareas> consultarDatos() {
         Cursor data = executeDb.consultarDatos(TABLENAME);
         return cursorToList(data);
     }
-    public List<Tareas> consultarPorId(int id) {
+    public ArrayList<Tareas> consultarPorId(int id) {
         String condicion = "id = ?";
         Cursor data = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion, new String[]{String.valueOf(id)});
         return cursorToList(data);

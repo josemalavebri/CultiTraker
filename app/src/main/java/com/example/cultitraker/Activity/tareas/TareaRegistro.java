@@ -18,6 +18,8 @@ import com.example.cultitraker.DataBase.CommandDb.TareasExecuteDb;
 import com.example.cultitraker.Models.Tareas;
 import com.example.cultitraker.R;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link TareaRegistro#newInstance} factory method to
@@ -31,12 +33,20 @@ public class TareaRegistro extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private EditText tipoActividad, descripcion, fecha, estado;
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private EditText tipoActividad, descripcion, fecha, estado;
+    private Button btnGuardar, btnCancelar;
+
+    private boolean isEdit;
+    private int id;
+    private TareasExecuteDb tareasExecuteDb;
+
 
     public TareaRegistro() {
         // Required empty public constructor
@@ -72,12 +82,54 @@ public class TareaRegistro extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tarea_registro, container, false);
+        View view = inflater.inflate(R.layout.fragment_tarea_registro, container, false);
+        initComponent(view);
+        return view;
+    }
+    private void initComponent(View view) {
+        tareasExecuteDb = new TareasExecuteDb(requireContext());
+
+        tipoActividad = view.findViewById(R.id.txt_tipoActividad);
+        descripcion = view.findViewById(R.id.txt_descripcionActividad);
+        fecha = view.findViewById(R.id.txt_fechaActividad);
+        estado = view.findViewById(R.id.txt_estadoActividad);
+
+        btnGuardar = view.findViewById(R.id.btn_guardar);
+        btnCancelar = view.findViewById(R.id.btnSalirTarea);
+
+        // Verifica si es modo edición (para cargar datos ya existentes)
+        isEdit = getArguments() != null && getArguments().getBoolean("isEdit", false);
+        id = getArguments() != null ? getArguments().getInt("id", 0) : 0;
+
+
+        if (isEdit) {
+            cargarDatosTarea();
+        }
+
+        inicializarEventos();
+    }
+
+    private void inicializarEventos() {
+        btnGuardar.setOnClickListener(v -> registrarTarea());
+        btnCancelar.setOnClickListener(v -> cancelarTarea());
+    }
+
+    private void cargarDatosTarea() {
+        ArrayList<Tareas> tareas = tareasExecuteDb.consultarPorId(id);
+        if (!tareas.isEmpty()) {
+            Tareas tarea = tareas.get(0);
+            tipoActividad.setText(tarea.getTipoActividad());
+            descripcion.setText(tarea.getDescripcion());
+            fecha.setText(tarea.getFecha());
+            estado.setText(tarea.getEstado());
+        } else {
+            Toast.makeText(requireContext(), "No se encontraron datos de la tarea", Toast.LENGTH_LONG).show();
+        }
     }
 
     private Tareas crearTareaData() {
         Tareas tarea = new Tareas();
+        tarea.setId(isEdit ? id : 0);
         tarea.setTipoActividad(tipoActividad.getText().toString());
         tarea.setDescripcion(descripcion.getText().toString());
         tarea.setFecha(fecha.getText().toString());
@@ -87,19 +139,45 @@ public class TareaRegistro extends Fragment {
 
     private void registrarTarea() {
         Tareas tarea = crearTareaData();
-        TareasExecuteDb tareasExecuteDb = new TareasExecuteDb(requireContext());
-
-        boolean isValid = tareasExecuteDb.agregarDatos(tarea);
-        if (isValid) {
-            Toast.makeText(getContext(), "Tarea guardada con éxito", Toast.LENGTH_SHORT).show();
+        boolean isValid;
+        if (isEdit) {
+            isValid = tareasExecuteDb.actualizarDatos(tarea);
         } else {
-            Toast.makeText(getContext(), "Tarea no guardada", Toast.LENGTH_SHORT).show();
+            isValid = tareasExecuteDb.agregarDatos(tarea);
         }
+
+        if (isValid) {
+            Toast.makeText(requireContext(), "Registro " + (isEdit ? "actualizado" : "guardado"), Toast.LENGTH_LONG).show();
+            limpiar();
+            ventanaPrincipal();
+        } else {
+            Toast.makeText(requireContext(), "Tarea no guardada", Toast.LENGTH_LONG).show();
+        }
+        isEdit = false;
+    }
+
+    private void limpiar() {
+        tipoActividad.setText("");
+        descripcion.setText("");
+        fecha.setText("");
+        estado.setText("");
     }
 
     private void cancelarTarea() {
-        // Regresar al fragmento anterior
-        requireActivity().getSupportFragmentManager().popBackStack();
+        limpiar();
+        ventanaPrincipal();
     }
-}
 
+    private void ventanaPrincipal() {
+        // Cambiar al fragmento principal, por ejemplo a ParcelaTierraFrag (ajusta según tu app)
+        TareasFragment nuevoFragment = new TareasFragment();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+}

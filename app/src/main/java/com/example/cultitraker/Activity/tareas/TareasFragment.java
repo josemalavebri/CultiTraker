@@ -1,5 +1,6 @@
 package com.example.cultitraker.Activity.tareas;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.cultitraker.Activity.Cultivo.CultivoRegistroFrag;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
+import com.example.cultitraker.AdapterItems.AdapterTareas;
 import com.example.cultitraker.DataBase.CommandDb.TareasExecuteDb;
 import com.example.cultitraker.Models.Tareas;
 import com.example.cultitraker.R;
@@ -28,9 +32,9 @@ import java.util.ArrayList;
  * Use the {@link TareasFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class TareasFragment extends Fragment {
 
-    RecyclerView recyclerView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +43,12 @@ public class TareasFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private RecyclerView recyclerView;
+    private TareasExecuteDb tareasExecuteDb;
+    private ArrayList<Integer> idCultivos;
+
 
     public TareasFragment() {
         // Required empty public constructor
@@ -76,48 +86,97 @@ public class TareasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tareas, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewTareas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        iniciarComponentes(view);
         cargarDatosTarea();
+        cargarEventos(view);
 
-        Button button = view.findViewById(R.id.btn_AgregarTarea);
-        button.setOnClickListener(v -> {
-            TareaRegistro nuevoFragment = new TareaRegistro();
-
-            requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frl_principal, nuevoFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
         return view;
     }
-    public void cargarDatosTarea() {
-        ArrayList<Tareas> tareas = cargarDatosTareaDB();
+
+    private void iniciarComponentes(View view) {
+        tareasExecuteDb = new TareasExecuteDb(requireContext());
+        recyclerView = view.findViewById(R.id.recyclerViewTareas);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+    }
+    private void cargarDatosTarea() {
+        ArrayList<Tareas> tareas = tareasExecuteDb.consultarDatos();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
-        if (tareas != null) {
-            for (Tareas tarea : tareas) {
-                AdapterModel adapterModel = new AdapterModel();
-                adapterModel.setTitulo(tarea.getTipoActividad());
-                adapterModel.setSubTitulo(tarea.getEstado());
-                adapterModel.setParrafo(tarea.getDescripcion());
-                adapterModel.setDetail(tarea.getFecha());
-                adapterModels.add(adapterModel);
-            }
-            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
-            recyclerView.setAdapter(adapterGeneral);
+        idCultivos = new ArrayList<>();
+
+        for (Tareas tarea : tareas) {
+            idCultivos.add(tarea.getId());
+
+            AdapterModel adapterModel = new AdapterModel();
+            adapterModel.setTitulo(tarea.getTipoActividad());
+            adapterModel.setSubTitulo(tarea.getEstado());
+            adapterModel.setParrafo(tarea.getDescripcion());
+            adapterModel.setDetail(tarea.getFecha());
+            adapterModels.add(adapterModel);
         }
+
+        AdapterTareas adapterGeneral = new AdapterTareas(adapterModels, requireContext(), R.layout.card_item_tareas);
+        adapterGeneral.setOnItemClickListener(v -> {
+            int position = (int) v.getTag();
+            int id = idCultivos.get(position);
+            //cambio
+            if (v.getId()==R.id.btn_EliminarTarea){
+                System.out.println("1");
+                confirmarEliminar(id);
+                cargarDatosTarea();
+            }else {
+                actualizarRegistro(id);
+            }
+        });
+        recyclerView.setAdapter(adapterGeneral);
     }
 
-    private ArrayList<Tareas> cargarDatosTareaDB() {
-        TareasExecuteDb tareaExecuteDb = new TareasExecuteDb(requireContext());
-        return tareaExecuteDb.consultarDatos();
+    private void cargarEventos(View view) {
+        Button button = view.findViewById(R.id.btn_AgregarTarea);
+        button.setOnClickListener(v -> cambiarFragment());
     }
-    /*
-    public void agregarActionButton(View view){
-        Intent intent = new Intent(this, TareaRegistroActivity.class);
-        startActivity(intent);
+
+    private void cambiarFragment() {
+        TareaRegistro nuevoFragment = new TareaRegistro();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
     }
-    */
+
+    private void actualizarRegistro(int id) {
+        //CAMBIO
+        TareaRegistro nuevoFragment = new TareaRegistro();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putBoolean("isEdit", true);
+        nuevoFragment.setArguments(bundle);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void confirmarEliminar(int id) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este registro?")
+                .setPositiveButton("Si", (dialog, which) -> {
+                    System.out.println("DATO");
+                    //cambio
+                    boolean eliminado = tareasExecuteDb.eliminarDatos(id);
+                    if(eliminado){
+                        Toast.makeText(requireContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
+                        cargarDatosTarea();
+                    }else{
+                        Toast.makeText(requireContext(), "Error al eliminar el registro", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 }
