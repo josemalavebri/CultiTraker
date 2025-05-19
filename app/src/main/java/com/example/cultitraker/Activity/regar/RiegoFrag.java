@@ -1,5 +1,6 @@
 package com.example.cultitraker.Activity.regar;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,10 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.cultitraker.Activity.Cultivo.CultivoRegistroFrag;
+import com.example.cultitraker.Activity.parcela.ParcelaRegistroFragment;
 import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
+import com.example.cultitraker.AdapterItems.AdapterParcela;
+import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
 import com.example.cultitraker.DataBase.CommandDb.RegarExecuteDb;
 import com.example.cultitraker.Models.Regar;
 import com.example.cultitraker.R;
@@ -27,7 +32,6 @@ import java.util.ArrayList;
  */
 public class RiegoFrag extends Fragment {
 
-    private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,6 +41,9 @@ public class RiegoFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
+    private ArrayList<Integer>idRiegos;
+    private RegarExecuteDb regarExecuteDb;
 
     public RiegoFrag() {
         // Required empty public constructor
@@ -72,7 +79,7 @@ public class RiegoFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_riego, container, false);
+        /*View view = inflater.inflate(R.layout.fragment_riego, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerViewRiego);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -89,27 +96,107 @@ public class RiegoFrag extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+        return view;*/
+
+        View view = inflater.inflate(R.layout.fragment_riego, container, false);
+
+        iniciarComponentes(view);
+        cargarDatosRiego();
+        cargarEventos(view);
+
         return view;
+    }
+
+    private void iniciarComponentes(View view){
+        regarExecuteDb = new RegarExecuteDb(requireContext());
+        recyclerView = view.findViewById(R.id.recyclerViewRiego);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
     }
 
     private void cargarDatosRiego() {
         ArrayList<Regar> riegos = cargarDatosRiegoDB();
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
+        idRiegos = new ArrayList<>();
         for (Regar riego : riegos) {
             AdapterModel adapterModel = new AdapterModel();
+            idRiegos.add(riego.getId());
             adapterModel.setTitulo(riego.getFecha()+riego.getHora());
             adapterModel.setSubTitulo(riego.getCantidadAgua() + " L");
             adapterModel.setParrafo(riego.getMetodoRiego());
             adapterModel.setDetail(String.valueOf(riego.getParcelaId()));
             adapterModels.add(adapterModel);
         }
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
-        recyclerView.setAdapter(adapterGeneral);
+        AdapterParcela adapterParcela = new AdapterParcela(adapterModels, requireContext(), R.layout.card_item_riego);
+
+        adapterParcela.setOnItemClickListener(v -> {
+            int position = (int) v.getTag();
+            int id = idRiegos.get(position);
+            //cambio
+            if (v.getId()==R.id.btn_EliminarParcelaTierra){
+                System.out.println("1");
+                confirmarEliminar(id);
+                cargarDatosRiego();
+            }else {
+                actualizarRegistro(id);
+            }
+        });
+
+        recyclerView.setAdapter(adapterParcela);
     }
 
     private ArrayList<Regar> cargarDatosRiegoDB() {
         RegarExecuteDb riegoExecuteDb = new RegarExecuteDb(requireContext());
         return riegoExecuteDb.consultarDatos();
+    }
+
+    private void confirmarEliminar(int id) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este registro?")
+                .setPositiveButton("Si", (dialog, which) -> {
+                    boolean eliminado = regarExecuteDb.eliminarDatos(id);
+                    if(eliminado){
+                        Toast.makeText(requireContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
+                        System.out.println("DATO");
+                        cargarDatosRiego();
+                    }else{
+                        Toast.makeText(requireContext(), "Error al eliminar el registro", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void actualizarRegistro(int id) {
+        RiegoRegistroFrag nuevoFragment = new RiegoRegistroFrag();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putBoolean("isEdit", true);
+        nuevoFragment.setArguments(bundle);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void cargarEventos(View view){
+        Button button = view.findViewById(R.id.btn_AgregarRiego);
+        button.setOnClickListener(v -> {
+            cambiarFragment();
+        });
+    }
+
+    private void cambiarFragment(){
+        RiegoRegistroFrag nuevoFragment = new RiegoRegistroFrag();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

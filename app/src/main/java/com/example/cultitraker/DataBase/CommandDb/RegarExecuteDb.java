@@ -8,7 +8,6 @@ import com.example.cultitraker.Models.Regar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class RegarExecuteDb {
@@ -25,7 +24,6 @@ public class RegarExecuteDb {
         datos.put(columnas[2], regar.getHora());
         datos.put(columnas[3], regar.getCantidadAgua());
         datos.put(columnas[4], regar.getMetodoRiego());
-        datos.put(columnas[5], regar.getParcelaId());
         return executeDb.agregarRegistroDB(TABLENAME, datos);
     }
 
@@ -34,10 +32,25 @@ public class RegarExecuteDb {
         return cursorToList(data);
     }
 
-    public List<Regar> consultarPorId(int id) {
+    public ArrayList<Regar> consultarPorId(int id) {
         String condicion = "Id = ?";
         Cursor data = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion, new String[]{String.valueOf(id)});
         return cursorToList(data) ;
+    }
+
+    private Map<String, Object> construirDatosRiego(Regar riego) {
+        Map<String, Object> datos = new HashMap<>();
+        datos.put(columnas[1], riego.getFecha());
+        datos.put(columnas[2], riego.getHora());
+        datos.put(columnas[3], riego.getCantidadAgua());
+        datos.put(columnas[4], riego.getMetodoRiego());
+        return datos;
+    }
+
+    public boolean actualizarDatos(Regar riego) {
+        Map<String, Object> datos = construirDatosRiego(riego);
+        datos.put(columnas[0], riego.getId());
+        return executeDb.actualizarDatos(TABLENAME, datos);
     }
 
     public boolean eliminarDatos(int id){
@@ -53,19 +66,16 @@ public class RegarExecuteDb {
                 int idxHora = data.getColumnIndex("hora");
                 int idxCantidadAgua = data.getColumnIndex("cantidadAgua");
                 int idxMetodoRiesgo = data.getColumnIndex("metodoRiego");
-                int idxParcelaId = data.getColumnIndex("parcelaId");
 
-                if (idxId != -1 && fechaxFecha != -1 && idxHora != -1 && idxCantidadAgua != -1 && idxMetodoRiesgo != -1 && idxParcelaId != -1) {
+                if (idxId != -1 && fechaxFecha != -1 && idxHora != -1 && idxCantidadAgua != -1 && idxMetodoRiesgo != -1 ) {
                     String idTexto = data.getString(idxId);
                     String fecha = data.getString(fechaxFecha);
                     String hora = data.getString(idxHora);
                     String cantidadAguaTexto = data.getString(idxCantidadAgua);
                     String metodoRiesgo = data.getString(idxMetodoRiesgo);
-                    String parcelaIdTexto = data.getString(idxParcelaId);
                     int id = Integer.parseInt(idTexto);
                     int cantidadAgua = Integer.parseInt(cantidadAguaTexto);
-                    int parcelaId = Integer.parseInt(parcelaIdTexto);
-                    listRegar.add(new Regar(id,fecha,hora,cantidadAgua,metodoRiesgo,parcelaId));
+                    listRegar.add(new Regar(id,fecha,hora,cantidadAgua,metodoRiesgo,0));
                 }
             } while (data.moveToNext());
         }

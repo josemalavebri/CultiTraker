@@ -123,12 +123,13 @@ public class ParcelaRegistroFragment extends Fragment {
     private void cargarTiposCultivo() {
         List<String> tiposCultivo = new ArrayList<>();
         tiposCultivo.add("Seleccione un cultivo");
-        tiposCultivo.addAll(Arrays.asList("Maíz", "Arroz", "Trigo", "Soja")); // Agrega los tipos de cultivo necesarios
+        tiposCultivo.addAll(Arrays.asList("MaÃ­z", "Arroz", "Trigo", "Soja")); // Agrega los tipos de cultivo necesarios
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, tiposCultivo);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCultivo.setAdapter(adapter);
     }
+
 
 
     private void inicializarEventos() {
