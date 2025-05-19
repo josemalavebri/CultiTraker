@@ -1,7 +1,9 @@
 package com.example.cultitraker.Activity.insumo;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -61,9 +63,31 @@ public class InsumoActivity extends AppCompatActivity {
         adapterGeneral.setOnItemClickListener(v -> {
             int position = (int) v.getTag();
             int id = idInsumos.get(position);
-            actualizarRegistro(id);
+            if (v.getId()==R.id.btn_Eliminar){
+                confirmarEliminar(id);
+                cargarDatosInsumo();
+            }else{
+                actualizarRegistro(id);
+            }
         });
         recyclerView.setAdapter(adapterGeneral);
+    }
+
+    private void confirmarEliminar(int id) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este registro?")
+                .setPositiveButton("Si", (dialog, which) -> {
+                    boolean eliminado = insumoExecuteDB.eliminarDatos(id);
+                    if(eliminado){
+                       Toast.makeText(getApplicationContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
+                       cargarDatosInsumo();
+                    }else{
+                       Toast.makeText(getApplicationContext(), "Error al eliminar el registro", Toast.LENGTH_LONG).show();
+                   }
+                })
+        .setNegativeButton("No", null)
+        .show();
     }
 
     private void actualizarRegistro(int id) {
@@ -81,4 +105,5 @@ public class InsumoActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InsumoRegistroActivity.class);
         startActivity(intent);
     }
+
 }

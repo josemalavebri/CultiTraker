@@ -86,8 +86,10 @@ public class ExecuteDb {
         if(db_delete== null){
             return false;
         }
-        int filasEliminadas = db_delete.delete("tabla", "id"+id,null);
-        return filasEliminadas>0;
+        String condicion = "id=?";
+        String[] args = {String.valueOf(id)};
+        int filasEliminadas = db_delete.delete(tabla, condicion, args);
+        return filasEliminadas > 0;
     }
 
 }

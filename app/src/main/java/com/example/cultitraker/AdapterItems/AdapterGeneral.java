@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,8 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
         if (onItemClickListener != null) {
             holder.itemView.setOnClickListener(onItemClickListener);
         }
+        holder.btn_Eliminar.setTag(position);
+        holder.btn_Eliminar.setOnClickListener(onItemClickListener);
     }
 
     @Override
@@ -54,12 +57,14 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_titulo,txt_name,txt_subName,txt_detail;
+        ImageView btn_Eliminar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_titulo = itemView.findViewById(R.id.txt_titulo);
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_subName = itemView.findViewById(R.id.txt_subName);
             txt_detail = itemView.findViewById(R.id.txt_detail);
+            btn_Eliminar = itemView.findViewById(R.id.btn_Eliminar);
         }
     }
 }
