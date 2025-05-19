@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class AdapterParcela extends RecyclerView.Adapter<AdapterParcela.ViewHolder>{
 
+    private View.OnClickListener onItemClickListener;
+
     private final int layoutId;
     private ArrayList<AdapterModel> listaDatos = new ArrayList<>();
     private Context context;
@@ -24,6 +26,10 @@ public class AdapterParcela extends RecyclerView.Adapter<AdapterParcela.ViewHold
         this.context = context;
         this.layoutId = layoutId;
     }
+    public void setOnItemClickListener(View.OnClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
 
     @NonNull
     @Override
@@ -38,6 +44,12 @@ public class AdapterParcela extends RecyclerView.Adapter<AdapterParcela.ViewHold
         holder.txt_name.setText(adapterModel.getSubTitulo());
         holder.txt_subName.setText(adapterModel.getParrafo());
         holder.txt_detail.setText(adapterModel.getDetail());
+        holder.itemView.setTag(position);
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(onItemClickListener);
+        }
+        holder.btn_Eliminar.setTag(position);
+        holder.btn_Eliminar.setOnClickListener(onItemClickListener);
     }
 
     @Override
@@ -47,14 +59,16 @@ public class AdapterParcela extends RecyclerView.Adapter<AdapterParcela.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_titulo,txt_name,txt_subName,txt_detail;
-        ImageView image;
+
+        ImageView btn_Eliminar;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_titulo = itemView.findViewById(R.id.txt_titulo);
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_subName = itemView.findViewById(R.id.txt_subName);
             txt_detail = itemView.findViewById(R.id.txt_detail);
-            image = itemView.findViewById(R.id.img_cultivo);
+            btn_Eliminar = itemView.findViewById(R.id.btn_EliminarParcelaTierra);
         }
     }
 }

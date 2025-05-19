@@ -83,11 +83,12 @@ public class ExecuteDb {
 
     public boolean eliminarDatos(String tabla, int id){
         SQLiteDatabase db_delete = db.getWritableDatabase();
-        if(db_delete== null){
+        if(db_delete == null){
             return false;
         }
-        int filasEliminadas = db_delete.delete("tabla", "id"+id,null);
-        return filasEliminadas>0;
+        int filasEliminadas = db_delete.delete(tabla, "id = ?", new String[]{String.valueOf(id)});
+        return filasEliminadas > 0;
     }
+
 
 }

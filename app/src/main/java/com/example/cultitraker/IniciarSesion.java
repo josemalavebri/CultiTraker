@@ -41,6 +41,8 @@ public class IniciarSesion extends AppCompatActivity {
         Usuario usuario = crearUsuarioData();
         if(comprobarDatosFormulario(usuario)){
             if(comprobarDatosBDD(usuario)){
+                Toast.makeText(this, "Inicio de sesion con exito", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
             }else{

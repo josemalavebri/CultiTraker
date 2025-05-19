@@ -28,12 +28,31 @@ public class ParcelaExecuteDb {
         return executeDb.agregarRegistroDB(TABLENAME, datos);
     }
 
+    public boolean actualizarDatos(Parcela parcela) {
+        Map<String, Object> datos = construirDatosParcela(parcela);
+        datos.put(columnas[0], parcela.getId());
+        return executeDb.actualizarDatos(TABLENAME, datos);
+    }
+
+
+    private Map<String, Object> construirDatosParcela(Parcela parcela) {
+        Map<String, Object> datos = new HashMap<>();
+        datos.put(columnas[1], parcela.getNombre());
+        datos.put(columnas[2], parcela.getTamano());
+        datos.put(columnas[3], parcela.getCultivo());
+        datos.put(columnas[4], parcela.getCantidadCultivo());
+        return datos;
+    }
+
+
+
+
     public ArrayList<Parcela> consultarDatos() {
         Cursor data =  executeDb.consultarDatos(TABLENAME);
         return cursorToList(data);
     }
 
-    public List<Parcela> consultarPorId(int id) {
+    public ArrayList<Parcela> consultarPorId(int id) {
         String condicion = "Id = ?";
         Cursor data = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion, new String[]{String.valueOf(id)});
         return cursorToList(data) ;

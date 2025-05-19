@@ -28,6 +28,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txt_nombreParcela"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -40,6 +41,7 @@
             android:textSize="19sp" />
 
         <EditText
+            android:id="@+id/txt_tamanoParcela"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -52,26 +54,13 @@
             android:textSize="19sp" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinnerCultivo"
             style="@android:style/Widget.Material.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/custom_edittext"
             android:scrollbarStyle="outsideInset" />
-
-        <EditText
-            android:id="@+id/txt_TipoRiego"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/custom_edittext"
-            android:hint="Cultivo"
-            android:inputType="textPersonName"
-            android:padding="12dp"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/black"
-            android:textSize="19sp" />
 
         <EditText
             android:id="@+id/txt_cantidadParcela"

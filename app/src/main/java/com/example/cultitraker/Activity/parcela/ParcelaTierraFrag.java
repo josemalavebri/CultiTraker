@@ -1,5 +1,6 @@
 package com.example.cultitraker.Activity.parcela;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
+import com.example.cultitraker.AdapterItems.AdapterParcela;
 import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
 import com.example.cultitraker.Models.Parcela;
 import com.example.cultitraker.R;
@@ -32,11 +34,15 @@ public class ParcelaTierraFrag extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+
+    //primero
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView recyclerView;
+    private ArrayList<Integer>idParcelas;
+    private ParcelaExecuteDb parcelaExecuteDb;
 
-    RecyclerView recyclerView;
 
 
     public ParcelaTierraFrag() {
@@ -71,36 +77,45 @@ public class ParcelaTierraFrag extends Fragment {
         }
     }
 
+
+    //segundo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //fragment_parcela_tierra
         View view = inflater.inflate(R.layout.fragment_parcela_tierra, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewParcelas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        iniciarComponentes(view);
         cargarDatosParcela();
+        cargarEventos(view);
 
-        Button button = view.findViewById(R.id.btn_AgregarInsumo);
-        button.setOnClickListener(v -> {
-            ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
-
-            requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frl_principal, nuevoFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
         return view;
     }
 
+    private void iniciarComponentes(View view){
+        //cambio
+        parcelaExecuteDb = new ParcelaExecuteDb(requireContext());
+        //ojo con el id del recycler
+
+        //cambio
+        recyclerView = view.findViewById(R.id.recyclerViewParcelas);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+    }
 
     private void cargarDatosParcela() {
-        ArrayList<Parcela> parcelas = cargarDatosParcelaDB();
+        //cambio
+        ArrayList<Parcela> parcelas = traerDatosParcelaDB();
+
         ArrayList<AdapterModel> adapterModels = new ArrayList<>();
 
-        for (Parcela parcela : parcelas) {
+        //cambio
+        idParcelas=new ArrayList<>();
+        //cambio
+         for (Parcela parcela : parcelas) {
             AdapterModel adapterModel = new AdapterModel();
+            idParcelas.add(parcela.getId());
+
             adapterModel.setTitulo(parcela.getNombre());
             adapterModel.setSubTitulo(parcela.getCultivo());
             adapterModel.setParrafo(String.valueOf(parcela.getTamano()));
@@ -108,16 +123,91 @@ public class ParcelaTierraFrag extends Fragment {
             adapterModels.add(adapterModel);
         }
 
-        AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_parcela);
-        recyclerView.setAdapter(adapterGeneral);
+
+
+        //cambio
+        AdapterParcela adapterParcela = new AdapterParcela(adapterModels, requireContext(), R.layout.card_item_parcela_tierra);
+
+        adapterParcela.setOnItemClickListener(v -> {
+            int position = (int) v.getTag();
+            int id = idParcelas.get(position);
+            //cambio
+            if (v.getId()==R.id.btn_EliminarParcelaTierra){
+                System.out.println("1");
+                confirmarEliminar(id);
+                cargarDatosParcela();
+            }else {
+                actualizarRegistro(id);
+            }
+        });
+
+        recyclerView.setAdapter(adapterParcela);
     }
 
-    private ArrayList<Parcela> cargarDatosParcelaDB() {
+    private void cargarEventos(View view){
+        //cambio
+
+        Button button = view.findViewById(R.id.btn_AgregarParcela);
+        button.setOnClickListener(v -> {
+            cambiarFragment();
+        });
+
+    }
+
+    private ArrayList<Parcela> traerDatosParcelaDB() {
+
+        //cambio
         ParcelaExecuteDb parcelaExecuteDb = new ParcelaExecuteDb(requireContext());
         return parcelaExecuteDb.consultarDatos();
     }
 
+    private void confirmarEliminar(int id) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este registro?")
+                .setPositiveButton("Si", (dialog, which) -> {
+                    System.out.println("DATO");
+                    //cambio
+                    boolean eliminado = parcelaExecuteDb.eliminarDatos(id);
+                    if(eliminado){
+                        Toast.makeText(requireContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
+                        cargarDatosParcela();
+                    }else{
+                        Toast.makeText(requireContext(), "Error al eliminar el registro", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void actualizarRegistro(int id) {
 
 
+        //CAMBIO
+        ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putBoolean("isEdit", true);
+        nuevoFragment.setArguments(bundle);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+    private void cambiarFragment(){
+        //CAMBIO
+        ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
 }

@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        cambiarFragment(new ParcelaTierraFrag());
+
+        cambiarFragment(new InsumoFrag());
+
+
         activityMainBinding.bnvPrincipal.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.parcelaMenu) {
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+
     }
 
     private void cambiarFragment(Fragment fragment){

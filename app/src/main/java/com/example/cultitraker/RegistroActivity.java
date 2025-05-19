@@ -29,23 +29,30 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    private Usuario getUsuario(){
-        usuarioExecuteDb = new UsuarioExecuteDb(this);
+    private Usuario getUsuario() {
+        EditText correoEditText = findViewById(R.id.txt_correoRegistro);
+        EditText contrasenaEditText = findViewById(R.id.txt_contrasena);
+
         Usuario usuario = new Usuario();
         usuario.setId(0);
-        usuario.setEmail(((EditText)findViewById(R.id.txt_cantidadParcela)).getText().toString());
-        usuario.setPassword(((EditText)findViewById(R.id.txt_TipoRiego)).getText().toString());
+        usuario.setEmail(correoEditText.getText().toString().trim());
+        usuario.setPassword(contrasenaEditText.getText().toString().trim());
+
         return usuario;
     }
 
-    public void guardarBD(View view){
+    public void guardarBD(View view) {
         Usuario usuario = getUsuario();
+        usuarioExecuteDb = new UsuarioExecuteDb(this);
         boolean resultado = usuarioExecuteDb.agregarDatos(usuario);
-        if (resultado)
+        if (resultado){
             Toast.makeText(this, "Registro guardado con exito", Toast.LENGTH_LONG).show();
-        else
+            Intent intent = new Intent(this, IniciarSesion.class);
+            startActivity(intent);
+        }
+        else {
             Toast.makeText(this, "Error al guardar", Toast.LENGTH_LONG).show();
-        reseteoObjetos();
+        }
     }
 
 

@@ -75,6 +75,15 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/btn_Eliminar"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_gravity="end|top"
+        android:contentDescription="@string/eliminar"
+        android:src="@android:drawable/ic_delete"
+        app:tint="#FDFCFC" />
+
 
 </androidx.cardview.widget.CardView>
 

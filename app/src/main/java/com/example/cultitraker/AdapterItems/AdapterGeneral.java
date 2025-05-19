@@ -4,17 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cultitraker.Models.Usuario;
 import com.example.cultitraker.R;
 
 import java.util.ArrayList;
 
 public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHolder>{
+
+    private View.OnClickListener onItemClickListener;
 
     private final int layoutId;
     private ArrayList<AdapterModel> listaDatos = new ArrayList<>();
@@ -24,6 +26,10 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
         this.context = context;
         this.layoutId = layoutId;
     }
+    public void setOnItemClickListener(View.OnClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
 
     @NonNull
     @Override
@@ -38,6 +44,12 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
         holder.txt_name.setText(adapterModel.getSubTitulo());
         holder.txt_subName.setText(adapterModel.getParrafo());
         holder.txt_detail.setText(adapterModel.getDetail());
+        holder.itemView.setTag(position);
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(onItemClickListener);
+        }
+        holder.btn_Eliminar.setTag(position);
+        holder.btn_Eliminar.setOnClickListener(onItemClickListener);
     }
 
     @Override
@@ -47,12 +59,16 @@ public class AdapterGeneral extends RecyclerView.Adapter<AdapterGeneral.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_titulo,txt_name,txt_subName,txt_detail;
+
+        ImageView btn_Eliminar;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txt_titulo = itemView.findViewById(R.id.txt_titulo);
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_subName = itemView.findViewById(R.id.txt_subName);
             txt_detail = itemView.findViewById(R.id.txt_detail);
+            btn_Eliminar = itemView.findViewById(R.id.btn_EliminarParcela);
         }
     }
 }

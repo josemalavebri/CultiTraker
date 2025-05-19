@@ -14,16 +14,20 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             +"email TEXT,"
             +"password TEXT)";
-    public static final String TABLA_INSUMO="CREATE TABLE InsumoActivity("+
+    public static final String TABLA_INSUMO="CREATE TABLE insumo("+
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            +"nombre TEXT,";
+            +"nombre TEXT," +
+            "tipo TEXT," +
+            "cantidad INTEGER," +
+            "fecha TEXT," +
+            "proveedor TEXT)";
 
     public static final String TABLA_CULTIVO = "CREATE TABLE cultivo (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "nombre TEXT," +
             "tipo TEXT," +
             "fechaSiembra TEXT)";
-    public static final String TABLA_PARCELA = "CREATE TABLE parcela (" +
+    public static final String TABLA_PARCELA = "CREATE TABLE parcelaTierra (" +
 
             "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
             "nombre TEXT,"+
@@ -59,8 +63,10 @@ public class SqlLiteDb extends SQLiteOpenHelper {
         db.execSQL(TABLA_PARCELA);
         db.execSQL(TABLA_TAREAS);
         db.execSQL(TABLA_CULTIVO);
+        db.execSQL(TABLA_INSUMO);
         db.execSQL(TABLA_REGAR);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
