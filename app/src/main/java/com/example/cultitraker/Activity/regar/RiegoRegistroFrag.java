@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.cultitraker.Activity.parcela.ParcelaTierraFrag;
 import com.example.cultitraker.DataBase.CommandDb.RegarExecuteDb;
 import com.example.cultitraker.Models.Enums.TipoInsumo;
 import com.example.cultitraker.Models.Regar;
@@ -153,11 +152,7 @@ public class RiegoRegistroFrag extends Fragment {
             hora.setText(riego.getHora());
             cantidadAgua.setText(String.valueOf(riego.getCantidadAgua()));
             tipoRiego.setText(riego.getMetodoRiego());
-            /*
-            ArrayAdapter adapter = (ArrayAdapter) spinnerTipoInsumo.getAdapter();
-            int position = adapter.getPosition(riego.get());
-            spinnerCultivo.setSelection(position);
-             */
+
         } else {
             Toast.makeText(requireContext(), "No se encontraron datos", Toast.LENGTH_LONG).show();
         }
@@ -168,7 +163,7 @@ public class RiegoRegistroFrag extends Fragment {
         riego.setId(isEdit ? id : 0);
         riego.setFecha(fecha.getText().toString());
         riego.setHora(hora.getText().toString());
-        riego.setCantidadAgua(Double.parseDouble(cantidadAgua.getText().toString()));
+        riego.setCantidadAgua(Integer.parseInt(cantidadAgua.getText().toString()));
         riego.setMetodoRiego(tipoRiego.getText().toString());
         return riego;
     }
@@ -187,7 +182,7 @@ public class RiegoRegistroFrag extends Fragment {
             limpiar();
             ventanaPrincipal();
         } else {
-            Toast.makeText(requireContext(), "Parcela no guardada", Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), "Riego no guardada", Toast.LENGTH_LONG).show();
         }
         isEdit = false;
     }

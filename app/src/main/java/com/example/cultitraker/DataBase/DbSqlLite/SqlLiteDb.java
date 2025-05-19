@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SqlLiteDb extends SQLiteOpenHelper {
     public static final String DbName="CultiTraker";
-    public static final int DbVersion=1;
+    public static final int DbVersion=3;
 
     private static final String TAG = "SqlLiteDb";
 
@@ -43,13 +43,12 @@ public class SqlLiteDb extends SQLiteOpenHelper {
             "estado TEXT,"+
             "fecha TEXT)";
 
-    public static String TABLA_REGAR = "CREATE TABLE regar (" +
+    public static final String TABLA_REGAR = "CREATE TABLE regar (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "fecha TEXT, " +
+            "fecha TEXT NOT NULL, " +
             "hora TEXT, " +
-            "cantidadAgua REAL, " +
-            "metodoRiego TEXT, " +
-            "parcelaId INTEGER)";
+            "cantidadAgua INTEGER NOT NULL, " +
+            "metodoRiego TEXT NOT NULL)";
 
 
     public SqlLiteDb(Context context) {
@@ -74,6 +73,7 @@ public class SqlLiteDb extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS usuario");
         db.execSQL("DROP TABLE IF EXISTS tareas");
         db.execSQL("DROP TABLE IF EXISTS cultivo");
+        db.execSQL("DROP TABLE IF EXISTS regar");
         onCreate(db);
     }
 

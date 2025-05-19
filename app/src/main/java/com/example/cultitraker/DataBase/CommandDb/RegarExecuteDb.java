@@ -2,6 +2,7 @@ package com.example.cultitraker.DataBase.CommandDb;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.cultitraker.DataBase.DbSqlLite.ExecuteDb;
 import com.example.cultitraker.Models.Regar;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegarExecuteDb {
-    private String[] columnas = {"id", "fecha", "hora", "cantidadAgua", "metodoRiego", "parcelaId"};
+    private String[] columnas = {"id", "fecha", "hora", "cantidadAgua", "metodoRiego"};
     private ExecuteDb executeDb ;
     private final String TABLENAME = "regar";
     public RegarExecuteDb(Context c) {
@@ -24,6 +25,12 @@ public class RegarExecuteDb {
         datos.put(columnas[2], regar.getHora());
         datos.put(columnas[3], regar.getCantidadAgua());
         datos.put(columnas[4], regar.getMetodoRiego());
+
+        Log.d("REGAR", "Fecha: " + regar.getFecha());
+        Log.d("REGAR", "Hora: " + regar.getHora());
+        Log.d("REGAR", "Cantidad: " + regar.getCantidadAgua());
+        Log.d("REGAR", "Método: " + regar.getMetodoRiego());
+
         return executeDb.agregarRegistroDB(TABLENAME, datos);
     }
 
@@ -75,7 +82,7 @@ public class RegarExecuteDb {
                     String metodoRiesgo = data.getString(idxMetodoRiesgo);
                     int id = Integer.parseInt(idTexto);
                     int cantidadAgua = Integer.parseInt(cantidadAguaTexto);
-                    listRegar.add(new Regar(id,fecha,hora,cantidadAgua,metodoRiesgo,0));
+                    listRegar.add(new Regar(id,fecha,hora,cantidadAgua,metodoRiesgo));
                 }
             } while (data.moveToNext());
         }

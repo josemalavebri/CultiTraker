@@ -13,12 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.cultitraker.Activity.Cultivo.CultivoRegistroFrag;
-import com.example.cultitraker.Activity.parcela.ParcelaRegistroFragment;
-import com.example.cultitraker.AdapterItems.AdapterGeneral;
 import com.example.cultitraker.AdapterItems.AdapterModel;
-import com.example.cultitraker.AdapterItems.AdapterParcela;
-import com.example.cultitraker.DataBase.CommandDb.ParcelaExecuteDb;
+import com.example.cultitraker.AdapterItems.AdapterRiego;
 import com.example.cultitraker.DataBase.CommandDb.RegarExecuteDb;
 import com.example.cultitraker.Models.Regar;
 import com.example.cultitraker.R;
@@ -79,25 +75,6 @@ public class RiegoFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*View view = inflater.inflate(R.layout.fragment_riego, container, false);
-
-        recyclerView = view.findViewById(R.id.recyclerViewRiego);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        cargarDatosRiego();
-
-        Button button = view.findViewById(R.id.btn_AgregarRiego);
-        button.setOnClickListener(v -> {
-            RiegoRegistroFrag nuevoFragment = new RiegoRegistroFrag();
-
-            requireActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frl_principal, nuevoFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
-        return view;*/
-
         View view = inflater.inflate(R.layout.fragment_riego, container, false);
 
         iniciarComponentes(view);
@@ -120,19 +97,19 @@ public class RiegoFrag extends Fragment {
         for (Regar riego : riegos) {
             AdapterModel adapterModel = new AdapterModel();
             idRiegos.add(riego.getId());
-            adapterModel.setTitulo(riego.getFecha()+riego.getHora());
-            adapterModel.setSubTitulo(riego.getCantidadAgua() + " L");
+            adapterModel.setTitulo(riego.getFecha());
+            adapterModel.setSubTitulo(String.valueOf(riego.getCantidadAgua()));
             adapterModel.setParrafo(riego.getMetodoRiego());
-            adapterModel.setDetail(String.valueOf(riego.getParcelaId()));
+            adapterModel.setDetail(riego.getHora());
             adapterModels.add(adapterModel);
         }
-        AdapterParcela adapterParcela = new AdapterParcela(adapterModels, requireContext(), R.layout.card_item_riego);
+        AdapterRiego adapterRiego = new AdapterRiego(adapterModels, requireContext(), R.layout.card_item_riego);
 
-        adapterParcela.setOnItemClickListener(v -> {
+        adapterRiego.setOnItemClickListener(v -> {
             int position = (int) v.getTag();
             int id = idRiegos.get(position);
-            //cambio
-            if (v.getId()==R.id.btn_EliminarParcelaTierra){
+
+            if (v.getId()==R.id.btn_EliminarRiego){
                 System.out.println("1");
                 confirmarEliminar(id);
                 cargarDatosRiego();
@@ -141,7 +118,7 @@ public class RiegoFrag extends Fragment {
             }
         });
 
-        recyclerView.setAdapter(adapterParcela);
+        recyclerView.setAdapter(adapterRiego);
     }
 
     private ArrayList<Regar> cargarDatosRiegoDB() {
