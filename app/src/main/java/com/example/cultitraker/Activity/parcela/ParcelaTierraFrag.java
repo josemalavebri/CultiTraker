@@ -82,8 +82,6 @@ public class ParcelaTierraFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //fragment_parcela_tierra
         View view = inflater.inflate(R.layout.fragment_parcela_tierra, container, false);
 
         iniciarComponentes(view);
@@ -122,8 +120,6 @@ public class ParcelaTierraFrag extends Fragment {
             adapterModel.setDetail(String.valueOf(parcela.getCantidadCultivo()));
             adapterModels.add(adapterModel);
         }
-
-
 
         //cambio
         AdapterParcela adapterParcela = new AdapterParcela(adapterModels, requireContext(), R.layout.card_item_parcela_tierra);
@@ -182,7 +178,6 @@ public class ParcelaTierraFrag extends Fragment {
 
     private void actualizarRegistro(int id) {
 
-
         //CAMBIO
         ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
         Bundle bundle = new Bundle();
@@ -198,7 +193,6 @@ public class ParcelaTierraFrag extends Fragment {
                 .commit();
     }
 
-
     private void cambiarFragment(){
         //CAMBIO
         ParcelaRegistroFragment nuevoFragment = new ParcelaRegistroFragment();
@@ -209,5 +203,7 @@ public class ParcelaTierraFrag extends Fragment {
                 .addToBackStack(null)
                 .commit();
     }
+
+
 
 }

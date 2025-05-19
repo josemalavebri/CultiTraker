@@ -7,8 +7,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.cultitraker.Activity.parcela.ParcelaTierraFrag;
+import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
+import com.example.cultitraker.Models.Cultivo;
+import com.example.cultitraker.Models.Parcela;
 import com.example.cultitraker.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +35,13 @@ public class CultivoRegistroFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private EditText nombreCultivo, tipoRiego, fechaSiembra;
+    private Button btnGuardar, btnCancelar;
+    private boolean isEdit;
+    private int id;
+    private CultivoExecuteDb cultivoExecuteDb;
+
 
     public CultivoRegistroFrag() {
         // Required empty public constructor
@@ -61,6 +78,103 @@ public class CultivoRegistroFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cultivo_registro, container, false);
+        View view = inflater.inflate(R.layout.fragment_cultivo_registro, container, false);
+        initComponent(view);
+        return view;
     }
+
+    private void initComponent(View view) {
+        // Instancia la clase de manejo de base de datos para Cultivo
+        cultivoExecuteDb = new CultivoExecuteDb(requireContext());
+
+        // Referencias a los campos del layout XML
+        nombreCultivo = view.findViewById(R.id.txt_nombreCultivo);
+        tipoRiego = view.findViewById(R.id.txt_TipoRiego);
+        fechaSiembra = view.findViewById(R.id.txt_cantidadParcela);
+        btnGuardar = view.findViewById(R.id.btn_guardar);
+        btnCancelar = view.findViewById(R.id.btn_salir);
+
+        // Verifica si es modo edición (para cargar datos ya existentes)
+        isEdit = getArguments() != null && getArguments().getBoolean("isEdit", false);
+        id = getArguments() != null ? getArguments().getInt("id", 0) : 0;
+
+        if (isEdit) {
+            cargarDatosCultivo();
+        }
+
+        inicializarEventos();
+    }
+
+    private void inicializarEventos() {
+        btnGuardar.setOnClickListener(v -> registrarCultivo());
+        btnCancelar.setOnClickListener(v -> cancelar());
+    }
+
+    private void cargarDatosCultivo() {
+        ArrayList<Cultivo> cultivos = cultivoExecuteDb.consultarPorId(id);
+
+        if (!cultivos.isEmpty()) {
+            Cultivo cultivo = cultivos.get(0);
+            nombreCultivo.setText(cultivo.getNombre());
+            tipoRiego.setText(cultivo.getTipo());
+            fechaSiembra.setText(String.valueOf(cultivo.getFechaSiembra()));
+        } else {
+            Toast.makeText(requireContext(), "No se encontraron datos del cultivo", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void registrarCultivo() {
+        Cultivo cultivo = crearCultivo();
+        boolean isValido;
+
+        if (isEdit) {
+            isValido = cultivoExecuteDb.actualizarDatos(cultivo);
+        } else {
+            isValido = cultivoExecuteDb.agregarDatos(cultivo);
+        }
+
+        if (isValido) {
+            Toast.makeText(requireContext(), "Registro " + (isEdit ? "actualizado" : "guardado"), Toast.LENGTH_LONG).show();
+            limpiar();
+            ventanaPrincipal();
+        } else {
+            Toast.makeText(requireContext(), "Cultivo no guardado", Toast.LENGTH_LONG).show();
+        }
+
+        isEdit = false;
+    }
+
+
+    private Cultivo crearCultivo() {
+        Cultivo cultivo = new Cultivo();
+        cultivo.setId(isEdit ? id : 0);
+        cultivo.setNombre(nombreCultivo.getText().toString());
+        cultivo.setTipo(tipoRiego.getText().toString());
+        cultivo.setFechaSiembra(fechaSiembra.getText().toString());
+        return cultivo;
+    }
+
+    private void limpiar() {
+        nombreCultivo.setText("");
+        tipoRiego.setText("");
+        fechaSiembra.setText("");
+    }
+
+
+    private void cancelar() {
+        limpiar();
+        ventanaPrincipal();
+    }
+
+    private void ventanaPrincipal() {
+        ParcelaTierraFrag nuevoFragment = new ParcelaTierraFrag();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }
