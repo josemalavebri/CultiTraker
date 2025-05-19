@@ -36,6 +36,7 @@
             android:hint="Nombre"
             android:inputType="text"
             android:padding="12dp"
+            android:textColor="#171717"
             android:textColorHint="#000000" />
 
         <Spinner
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/custom_edittext"
+            android:backgroundTint="#191818"
             android:padding="12dp" />
 
         <EditText
@@ -56,6 +58,7 @@
             android:hint="Cantidad"
             android:inputType="number"
             android:padding="12dp"
+            android:textColor="#070707"
             android:textColorHint="#040404" />
 
         <EditText
@@ -90,6 +93,7 @@
                 android:hint="Fecha"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#101010"
                 android:textColorHint="#070707" />
 
             <com.google.android.material.button.MaterialButton

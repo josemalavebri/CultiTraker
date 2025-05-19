@@ -25,6 +25,7 @@ import java.util.ArrayList;
  * Use the {@link CultivoRegistroFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class CultivoRegistroFrag extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match

@@ -68,6 +68,7 @@
             android:hint="Ingrese Fecha de Siembra"
             android:inputType="number"
             android:padding="12dp"
+            android:textColor="#141414"
             android:textColorHint="@color/black" />
 
         <LinearLayout
