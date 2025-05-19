@@ -76,6 +76,7 @@
             android:hint="Fecha"
             android:inputType="number"
             android:padding="12dp"
+            android:textColor="#090909"
             android:textColorHint="@color/black" />
 
         <LinearLayout
