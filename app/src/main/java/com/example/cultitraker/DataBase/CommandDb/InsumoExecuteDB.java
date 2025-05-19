@@ -51,7 +51,7 @@ public class InsumoExecuteDB {
         Cursor data=executeDb.consultarDatosCondicion(TABLENAME,columnas,condicion,new String[]{nombre});
         return cursorToList(data);
     }
-    public boolean eliminarDatos(int id){
+    public boolean eliminarInsumo(int id){
         return executeDb.eliminarDatos(TABLENAME,id);
     }
     private ArrayList<Insumo>cursorToList(Cursor data){

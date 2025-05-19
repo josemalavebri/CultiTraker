@@ -3,7 +3,6 @@ package com.example.cultitraker.Activity.insumo;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -78,7 +77,7 @@ public class InsumoActivity extends AppCompatActivity {
                 .setTitle("Confirmar eliminación")
                 .setMessage("¿Estás seguro de que deseas eliminar este registro?")
                 .setPositiveButton("Si", (dialog, which) -> {
-                    boolean eliminado = insumoExecuteDB.eliminarDatos(id);
+                    boolean eliminado = insumoExecuteDB.eliminarInsumo(id);
                     if(eliminado){
                        Toast.makeText(getApplicationContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
                        cargarDatosInsumo();
