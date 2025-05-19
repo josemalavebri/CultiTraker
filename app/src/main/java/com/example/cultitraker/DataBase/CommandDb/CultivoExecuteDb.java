@@ -33,11 +33,27 @@ public class CultivoExecuteDb {
         return cursorToList(data);
     }
 
-    public List<Cultivo> consultarPorId(int id) {
+    public ArrayList<Cultivo> consultarPorId(int id) {
         String condicion = "Id = ?";
         Cursor data = executeDb.consultarDatosCondicion(TABLENAME, columnas, condicion, new String[]{String.valueOf(id)});
         return cursorToList(data) ;
     }
+
+    public boolean actualizarDatos(Cultivo cultivo) {
+        Map<String, Object> datos = construirDatosCultivo(cultivo);
+        datos.put(columnas[0], cultivo.getId()); // ID en la primera columna
+        return executeDb.actualizarDatos(TABLENAME, datos);
+    }
+
+    private Map<String, Object> construirDatosCultivo(Cultivo cultivo) {
+        Map<String, Object> datos = new HashMap<>();
+        datos.put(columnas[1], cultivo.getNombre());
+        datos.put(columnas[2], cultivo.getTipo());
+        datos.put(columnas[3], cultivo.getFechaSiembra());
+        return datos;
+    }
+
+
 
     public boolean eliminarDatos(int id){
         return executeDb.eliminarDatos(TABLENAME,id);

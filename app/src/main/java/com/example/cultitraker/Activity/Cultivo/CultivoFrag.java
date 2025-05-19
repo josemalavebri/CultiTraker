@@ -1,12 +1,8 @@
 package com.example.cultitraker.Activity.Cultivo;
 
-import static android.widget.Toast.LENGTH_SHORT;
-
+import android.app.AlertDialog;
 import android.os.Bundle;
 
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.cultitraker.Activity.parcela.ParcelaRegistroFragment;
-import com.example.cultitraker.AdapterItems.AdapterGeneral;
+import com.example.cultitraker.AdapterItems.AdapterCultivo;
 import com.example.cultitraker.AdapterItems.AdapterModel;
 import com.example.cultitraker.DataBase.CommandDb.CultivoExecuteDb;
 import com.example.cultitraker.Models.Cultivo;
 import com.example.cultitraker.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -34,7 +28,6 @@ import java.util.ArrayList;
  */
 public class CultivoFrag extends Fragment {
 
-    private RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +37,11 @@ public class CultivoFrag extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private ArrayList<Integer> idCultivos;
+    private CultivoExecuteDb cultivoExecuteDb;
+
 
     public CultivoFrag() {
         // Required empty public constructor
@@ -81,41 +79,119 @@ public class CultivoFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_cultivo, container, false);
+        View view = inflater.inflate(R.layout.fragment_cultivo, container, false);
 
-        recyclerView = rootView.findViewById(R.id.recyclerViewCultivo);  // <- cambia esto por el id real en fragment_cultivo.xml
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        iniciarComponentes(view);
         cargarDatosCultivo();
+        cargarEventos(view);
 
-        return rootView;
-
+        return view;
     }
 
 
-    private void cargarDatosCultivo() {
-        ArrayList<Cultivo> cultivos = cargarDatosCultivoDB();
-        if(cultivos.isEmpty()){
-            Toast.makeText(requireContext(),"No hay datos que mostrar",LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(requireContext(),"Hay Datos que mostrar",LENGTH_SHORT).show();
-            ArrayList<AdapterModel> adapterModels = new ArrayList<>();
-
-            for (Cultivo cultivo : cultivos) {
-                AdapterModel adapterModel = new AdapterModel();
-                adapterModel.setTitulo(cultivo.getNombre());
-                adapterModel.setSubTitulo(cultivo.getTipo());
-                adapterModel.setParrafo(cultivo.getFechaSiembra());
-                adapterModels.add(adapterModel);
-            }
-
-            AdapterGeneral adapterGeneral = new AdapterGeneral(adapterModels, requireContext(), R.layout.card_item_bloque);
-            recyclerView.setAdapter(adapterGeneral);
+    private void iniciarComponentes(View view){
+        cultivoExecuteDb = new CultivoExecuteDb(requireContext());
+        recyclerView = view.findViewById(R.id.recyclerViewCultivo);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         }
 
+    private void cargarDatosCultivo() {
+        //cambio
+        ArrayList<Cultivo> cultivos = traerDatosCultivoDB();
+
+        ArrayList<AdapterModel> adapterModels = new ArrayList<>();
+
+        //cambio
+        idCultivos = new ArrayList<>();
+        //cambio
+        for (Cultivo cultivo : cultivos) {
+            AdapterModel adapterModel = new AdapterModel();
+            idCultivos.add(cultivo.getId());
+
+            adapterModel.setTitulo(cultivo.getNombre());
+            adapterModel.setSubTitulo(cultivo.getTipo());
+            adapterModels.add(adapterModel);
+        }
+
+        //cambio
+        AdapterCultivo adapterCultivo = new AdapterCultivo(adapterModels, requireContext(), R.layout.card_item_cultivo);
+
+        adapterCultivo.setOnItemClickListener(v -> {
+            int position = (int) v.getTag();
+            int id = idCultivos.get(position);
+            //cambio
+            if (v.getId()==R.id.btn_EliminarCultivo){
+                System.out.println("1");
+                confirmarEliminar(id);
+                cargarDatosCultivo();
+            }else {
+                actualizarRegistro(id);
+            }
+        });
+
+        recyclerView.setAdapter(adapterCultivo);
     }
 
-    private ArrayList<Cultivo> cargarDatosCultivoDB() {
+    private void actualizarRegistro(int id) {
+        //CAMBIO
+        CultivoRegistroFrag nuevoFragment = new CultivoRegistroFrag();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", id);
+        bundle.putBoolean("isEdit", true);
+        nuevoFragment.setArguments(bundle);
+
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
+    private void confirmarEliminar(int id) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de que deseas eliminar este registro?")
+                .setPositiveButton("Si", (dialog, which) -> {
+                    System.out.println("DATO");
+                    //cambio
+                    boolean eliminado = cultivoExecuteDb.eliminarDatos(id);
+                    if(eliminado){
+                        Toast.makeText(requireContext(), "Registro eliminado correctamente", Toast.LENGTH_LONG).show();
+                        cargarDatosCultivo();
+                    }else{
+                        Toast.makeText(requireContext(), "Error al eliminar el registro", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private ArrayList<Cultivo> traerDatosCultivoDB() {
         CultivoExecuteDb cultivoExecuteDb = new CultivoExecuteDb(requireContext());
         return cultivoExecuteDb.consultarDatos();
     }
+
+    private void cargarEventos(View view){
+        //cambio
+
+        Button button = view.findViewById(R.id.btn_AgregarCultivo);
+        button.setOnClickListener(v -> {
+            cambiarFragment();
+        });
+
+    }
+
+    private void cambiarFragment(){
+        //CAMBIO
+        CultivoRegistroFrag nuevoFragment = new CultivoRegistroFrag();
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frl_principal, nuevoFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 }

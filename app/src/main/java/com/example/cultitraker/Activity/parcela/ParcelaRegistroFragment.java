@@ -131,6 +131,7 @@ public class ParcelaRegistroFragment extends Fragment {
     }
 
 
+
     private void inicializarEventos() {
         btnGuardar.setOnClickListener(v -> registrarParcela());
         btnCancelar.setOnClickListener(v -> cancelar());

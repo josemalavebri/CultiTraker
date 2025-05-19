@@ -6,6 +6,9 @@ public class Cultivo {
     private String tipo;
     private String fechaSiembra;
 
+
+    public Cultivo(){
+    }
     public Cultivo(int id, String nombre, String tipo, String fechaSiembra) {
         this.id = id;
         this.nombre = nombre;
