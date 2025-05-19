@@ -65,7 +65,7 @@ public class InsumoActivity extends AppCompatActivity {
             if (v.getId()==R.id.btn_Eliminar){
                 confirmarEliminar(id);
                 cargarDatosInsumo();
-            }else{
+            }else {
                 actualizarRegistro(id);
             }
         });

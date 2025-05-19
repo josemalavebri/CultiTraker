@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -48,6 +49,7 @@ public class InsumoRegistroActivity extends AppCompatActivity {
     private Spinner tipo;
     private boolean isEdit;
     private int id;
+    private Button btn_Guardar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +73,17 @@ public class InsumoRegistroActivity extends AppCompatActivity {
         proveedor = findViewById(R.id.txt_ProveInsumo);
         tipo = findViewById(R.id.txt_TipoInsumo);
         fecha =findViewById(R.id.txt_FechaInsumo);
+        btn_Guardar = findViewById(R.id.btn_Guardar);
         isEdit = getIntent().getBooleanExtra("isEdit",false);
         id=getIntent().getIntExtra("id",0);
         tiposInsumos();
         if (isEdit) agregarDatosForm();
     }
+    @SuppressLint("SetTextI18n")
     private void agregarDatosForm(){
         ArrayList<Insumo>insumos=insumoExecuteDB.consultarPorId(id);
         if(insumos!=null){
+            btn_Guardar.setText("Actualizar");
             nombre.setText(insumos.get(0).getNombre());
             cantidad.setText(String.valueOf(insumos.get(0).getCantidad()));
             fecha.setText(insumos.get(0).getFecha());
